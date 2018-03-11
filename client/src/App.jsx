@@ -4,13 +4,17 @@ import './App.css';
 import NavBar from './NavBar.jsx'
 
 class App extends Component {
-  state = {
-    response: ''
-  };
+  constructor() {
+    super();
+    this.state = {}
+  }
 
-    componentDidMount() {
+
+  componentDidMount() {
     this.callApi()
-      .then(res => this.setState({ response: res.express }))
+      .then(res => {
+        console.log(res.response.players)
+        this.setState({ response: res.response.players[0].personaname })})
       .catch(err => console.log(err));
   }
 
@@ -28,6 +32,7 @@ class App extends Component {
       <div>
       <NavBar />
       <h1>Hello React :)</h1>
+      <p>{this.state.response}</p>
       </div>
     );
   }

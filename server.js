@@ -4,6 +4,7 @@ const express = require('express');
 const knexConfig = require('./knexfile');
 const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
+const request = require('request')
 
 const app = express();
 
@@ -23,8 +24,11 @@ app.use('/', registerRoutes(knex));
 
 
 app.get('/api/hello', (req, res) => {
-  res.send({ express: 'Hello From Express' });
+  request({
+    "uri": 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=FF967EC4968D206F9FA1485AC5F6E162&steamids=76561198075355796'
+  }).pipe(res);
 });
+
 
 
 
