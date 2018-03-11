@@ -6,7 +6,7 @@
  module.exports = () => {
 
   router.get('/user', function(req, res, next) {
-     res.sendFile('/');
+      res.send({ express: 'Hello From Express' });
   });
 
   router.post('/',

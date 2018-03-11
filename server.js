@@ -6,8 +6,18 @@ const knex = require('knex')(knexConfig[ENV]);
 const app = express();
 const port = process.env.PORT || 5000;
 
+//Resource Routes
+const authenticateRoutes = require('./routes/authenticate');
+const registerRoutes = require('./routes/register');
+
+app.use('/', authenticateRoutes());
+app.use('/', registerRoutes(knex));
+
+
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
+
+
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
