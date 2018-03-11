@@ -9,11 +9,13 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.3",
+    "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.2",
     "knex": "^0.14.4",
     "passport": "^0.4.0",
-    "pg": "^7.4.1"
+    "pg": "^7.4.1",
+    "request": "^2.83.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.1"
