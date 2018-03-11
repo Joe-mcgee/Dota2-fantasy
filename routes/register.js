@@ -1,22 +1,19 @@
 const express = require('express');
-const router = express.Router();
+const app = express();
 const passport = require('passport');
 const path = require('path');
 const bcrypt = require('bcrypt');
-const bodyParser = require("body-parser")
-const app = express();
+const router = express.Router();
 
-//app.use(bodyParser.urlencoded({extended: true}));
-console.log('im linking this file at least')
 
 module.exports = (knex) => {
-  console.log('and here too')
+
 /*  router.get('/', function(req, res, next){
    res.sendFile('/');
 });*/
 
-router.post('/register', function(req,res, next) {
-  console.log('HELLO')
+router.post('/register', (req, res, next) => {
+  console.log(req.body)
   knex.select('email').from('users').then(function(emails) {
     if (emails.length) {
        return next(err);

@@ -12,7 +12,7 @@ fork and clone
 
 cd into client
 
-`npm install `
+`npm install`
 
 to run server use command
 

@@ -2,8 +2,11 @@ const ENV = process.env.ENV || 'development';
 const express = require('express');
 const knexConfig = require('./knexfile');
 const knex = require('knex')(knexConfig[ENV]);
+const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false}))
 const port = process.env.PORT || 5000;
 
 //Resource Routes
