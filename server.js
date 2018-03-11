@@ -6,6 +6,7 @@ const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
 const request = require('request')
 
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}))
@@ -22,14 +23,13 @@ const registerRoutes = require('./routes/register');
 app.use('/', authenticateRoutes());
 app.use('/', registerRoutes(knex));
 
-
+app.use(cors());
 app.get('/api/hello', (req, res) => {
+
   request({
     "uri": 'http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=FF967EC4968D206F9FA1485AC5F6E162&steamids=76561198075355796'
   }).pipe(res);
 });
-
-
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
