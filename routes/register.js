@@ -13,17 +13,18 @@ module.exports = (knex) => {
 });*/
 
 router.post('/register', (req, res, next) => {
-  console.log(req.body)
+
   knex.select('email').from('users').then(function(emails) {
     if (emails.length) {
        return next(err);
     } else {
-      bcrypt.hash(req.body.password, salt, (err, hash) => {
+
+      bcrypt.hash(req.body.password, 9, (err, hash) => {
         if (err) return next(err);
-        newUser = {name: req.body.name, email: req.body.email};
+        const newUser = {name: req.body.username, email: req.body.email};
         newUser.password = hash;
         return knex('users').insert(newUser).then(function() {
-           res.redirect('/')
+           res.redirect('http://localhost:3000')
            return
         })
       })
