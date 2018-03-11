@@ -10,6 +10,10 @@ fork and clone
 
 `npm install`
 
+cd into client
+
+`npm install `
+
 to run server use command
 
 `npm run dev`
