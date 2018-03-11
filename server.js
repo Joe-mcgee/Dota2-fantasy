@@ -23,7 +23,6 @@ const registerRoutes = require('./routes/register');
 app.use('/', authenticateRoutes());
 app.use('/', registerRoutes(knex));
 
-app.use(cors());
 app.get('/api/hello', (req, res) => {
 
   request({
