@@ -1,14 +1,12 @@
 
+
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('teams', function(table) {
       table.increments();
       table.integer('points');
-      table.string('support');
-      table.string('adc');
-      table.string('jungle');
-      table.string('mid');
-      table.string('top');
+      table.integer('players_id').unsigned();
+      table.foreign('players_id').references('id').inTable('players');
       table.integer('users_id').unsigned();
       table.foreign('users_id').references('id').inTable('users');
 
