@@ -7,8 +7,8 @@ const bodyParser = require('body-parser');
 
 const request = require('request-promise');
 const strint = require('./strint/strint.js');
-const Dota2Api = require('dota2-api');
-const da = Dota2Api.create('FF967EC4968D206F9FA1485AC5F6E162', 570);
+
+
 
 const app = express();
 
