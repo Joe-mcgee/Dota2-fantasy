@@ -28,18 +28,11 @@ app.use('/', registerRoutes(knex));
 
 
 app.get('/api/hello', (req, res) => {
-  request.get({
-    "uri": `http://api.sportradar.us/dota2-t1/en/schedules/2018-03-08/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
-  }).then((response) => {
-    const data = JSON.parse(response);
-    res.send(data)
-
-    return request.get({
+ request.get({
       "uri": `http://api.sportradar.us/dota2-t1/en/schedules/2018-03-08/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
     }).pipe(res)
   });
 
-});
 
 
 

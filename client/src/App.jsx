@@ -13,8 +13,8 @@ class App extends Component {
   componentDidMount() {
     this.callApi()
       .then(res => {
-        console.log(res.response.players)
-        this.setState({ response: res.response.players[0].personaname })})
+        console.log(res['sport_events'])
+        this.setState({ response: res['sport_events'][0].id })})
       .catch(err => console.log(err));
   }
 

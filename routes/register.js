@@ -22,7 +22,7 @@ module.exports = (knex) => {
     knex.select('email').from('users').where('email', req.body.email).then(function(emails) {
       if (emails.length) {
         res.send('email already in use!');
-        return
+        return;
       } else {
 
         bcrypt.hash(req.body.password, 9, (err, hash) => {
@@ -31,13 +31,13 @@ module.exports = (knex) => {
           newUser.password = hash;
           return knex('users').insert(newUser).then(function() {
             req.session.user_id = randomId;
-            res.redirect('http://localhost:3000')
-            return
-          })
-        })
+            res.redirect('http://localhost:3000');
+            return;
+          });
+        });
       }
-    })
+    });
 
-  })
-  return router
-}
+  });
+  return router;
+};

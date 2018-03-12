@@ -1,0 +1,31 @@
+1. Get Tournaments
+http://api.sportradar.us/dota2-t1/en/tournaments.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+- "id": "sr:tournament:13911",
+
+2. Get Tournament group and teams
+
+http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/info.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+- 'name': 'a' && id:'sr:competitor:250059'
+
+2a.  Get Team Members
+
+http://api.sportradar.us/dota2-t1/en/teams/sr:competitor:242378/profile.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+-"id": "sr:player:952770"
+
+3. get player profile
+http://api.sportradar.us/dota2-t1/en/players/sr:player:952770/profile.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+3a. Tournament Schedule to find games, every game by team
+
+http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/schedule.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+example id: sr:match:12114996
+
+4. get match summary by match id
+
+http://api.sportradar.us/dota2-t1/en/matches/sr:match:12114996/summary.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+get player statistics kills
