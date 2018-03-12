@@ -13,13 +13,17 @@ class App extends Component {
   componentDidMount() {
     this.callApi()
       .then(res => {
-        console.log(res['sport_events'])
-        this.setState({ response: res['sport_events'][0].id })})
+        console.log(res.players)
+        const nicknames = [];
+        res.players.forEach((player) => {
+        nicknames.push(player.nickname)
+        })
+        this.setState({ response: nicknames })})
       .catch(err => console.log(err));
   }
 
   callApi = async () => {
-    const response = await fetch('/api/hello');
+    const response = await fetch('/getplayers');
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);

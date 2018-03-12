@@ -10,6 +10,7 @@ const strint = require('./strint/strint.js');
 
 
 
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
@@ -22,9 +23,11 @@ const port = process.env.PORT || 5000;
 //Resource Routes
 const authenticateRoutes = require('./routes/authenticate');
 const registerRoutes = require('./routes/register');
+const createTeamRoutes = require('./routes/create_team');
 
 app.use('/', authenticateRoutes());
 app.use('/', registerRoutes(knex));
+app.use('/', createTeamRoutes(knex));
 
 
 app.get('/api/hello', (req, res) => {
