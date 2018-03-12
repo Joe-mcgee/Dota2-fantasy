@@ -5,8 +5,8 @@ const knexConfig = require('./knexfile');
 const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
 const request = require('request')
-const BigNumber = require('bignumber.js');
 const strint = require('./strint/strint.js')
+const Dota2Api = require('dota2-api');
 
 const app = express();
 
@@ -28,7 +28,13 @@ app.use('/', registerRoutes(knex));
 app.get('/api/hello', (req, res) => {
   const BigSteam64 = strint.add("76561198075355796", "0")
   const steam64 = '76561198075355796'
-  console.log(`something=${BigSteam64}`)
+  // const da = Dota2Api.create('FF967EC4968D206F9FA1485AC5F6E162', 570)
+  // const oprtions = {game_mode: 1};
+  //   da.getMatchHistory('3719509349').then((result) => {
+  //     console.log(result);
+  // }, (errorResponseStatusText) => {
+  //     console.log(errorResponseStatusText);
+  // });
   request({
     "uri": `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=FF967EC4968D206F9FA1485AC5F6E162&steamids=${BigSteam64}`
   }).pipe(res);
