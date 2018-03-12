@@ -4,17 +4,12 @@ const express = require('express');
 const knexConfig = require('./knexfile');
 const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
-<<<<<<< HEAD
-const request = require('request')
-const strint = require('./strint/strint.js')
-const Dota2Api = require('dota2-api');
 
-=======
 const request = require('request-promise');
 const strint = require('./strint/strint.js');
 const Dota2Api = require('dota2-api');
 const da = Dota2Api.create('FF967EC4968D206F9FA1485AC5F6E162');
->>>>>>> 6ecaeab565de11d3df211a391a2a2686c9de4c9a
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
