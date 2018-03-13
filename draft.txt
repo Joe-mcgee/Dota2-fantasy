@@ -29,3 +29,15 @@ example id: sr:match:12114996
 http://api.sportradar.us/dota2-t1/en/matches/sr:match:12114996/summary.json?api_key=bxhu87awpkaw7tvxayrck76s
 
 get player statistics kills
+
+
+
+Draft 2 - Get player results
+1.
+
+http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/schedule.json?api_key=bxhu87awpkaw7tvxayrck76s
+
+filter tournament round : group A && scheduled matching date
+get match id
+
+2.
