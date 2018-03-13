@@ -1,12 +1,19 @@
- const express = require('express');
- const router = express.Router();
- const path = require('path');
+const express = require('express');
+const router = express.Router();
+const path = require('path');
 
- module.exports = () => {
+function generateRandomString() {
+  // https://stackoverflow.com/questions/10726909/random-alpha-numeric-string-in-javascript
+  return Math.random().toString(36).slice(7);
+}
+
+
+module.exports = () => {
 
   router.get('/user', function(req, res, next) {
     res.send({ express: 'Hello From Express' });
   });
+
 
   router.post('/login', (req, res) => {
     const email = req.body.email;
@@ -16,7 +23,11 @@
     knex.select('*').from('users').where('email', email).then((res) => {
       if (!res) redirect('/');
 
-      console.log(res)
+      if (bcrypt.compareSync(req.body.password, res.password)) {
+        req.session.user_id = generateRandomString();
+        res.redirect('http://localhost:3000');
+        return;
+      }
     });
 
 
