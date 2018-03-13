@@ -6,7 +6,7 @@ const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
 
 const request = require('request-promise');
-const strint = require('./strint/strint.js');
+
 
 
 
@@ -35,7 +35,7 @@ app.use('/', getPlayerResults(knex));
 app.get('/api/hello', (req, res) => {
  request.get({
       "uri": `http://api.sportradar.us/dota2-t1/en/schedules/2018-03-08/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
-    }).pipe(res)
+    }).pipe(res);
   });
 
 

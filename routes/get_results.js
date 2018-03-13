@@ -1,3 +1,4 @@
+/* eslint-disable */
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -19,10 +20,28 @@ function createTimePad(series = 10, timeout = 1000) {
   };
 }
 
+function burrowMatches(outputs, hardCodedPlayers) {
+  const relevantPlayers = [];
+  outputs.forEach((output) => {
+  const rounds = output.statistics.games
+  rounds.forEach((round) => {
+    round.teams.forEach((team) => {
+      team.players.forEach((player) => {
+        if (hardCodedPlayers.includes(player.nickname)) {
+          relevantPlayers.push(player)
+        }
+      })
+    });
+  });
+})
+  return relevantPlayers
+}
+
 
 module.exports = (knex) => {
 
   router.get('/getresults', (req, res) => {
+    const hardCodedPlayers = ["KuKu", "Raven", "fn"]
     request.get({
       uri: `http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
     })
@@ -46,8 +65,8 @@ module.exports = (knex) => {
           ps.push(timePad().then(() => request(match_details)));
         }
         return Promise.all(ps)
-          .then((response) => {
-            res.send(response);
+          .then((outputs) => {
+            res.send(JSON.stringify(burrowMatches(outputs, hardCodedPlayers)))
           });
 
 
