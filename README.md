@@ -16,4 +16,6 @@ cd into client
 
 to run server use command
 
+copy env and add credentials
+
 `npm run dev`
