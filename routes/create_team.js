@@ -54,9 +54,9 @@ router.get('/getplayers', (req, res) => {
               teamName: resObj.team.name,
               nickName: resObj.players[j].nickname
             };
-            knex.insert(dbPlayerObj).into('players').then((response) => {
+          /*  knex.insert(dbPlayerObj).into('players').then((response) => {
               console.log(response)
-            })
+            })*/
 
             }
           }
