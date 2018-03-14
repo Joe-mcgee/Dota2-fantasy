@@ -10,26 +10,26 @@ class App extends Component {
   }
 
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => {
-        console.log(res.players)
-        const nicknames = [];
-        res.players.forEach((player) => {
-        nicknames.push(player.nickname)
-        })
-        this.setState({ response: nicknames })})
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   this.callApi()
+  //     .then(res => {
+  //       console.log(res.players)
+  //       const nicknames = [];
+  //       res.players.forEach((player) => {
+  //       nicknames.push(player.nickname)
+  //       })
+  //       this.setState({ response: nicknames })})
+  //     .catch(err => console.log(err));
+  // }
 
-  callApi = async () => {
-    const response = await fetch('/getplayers');
-    const body = await response.json();
+  // callApi = async () => {
+  //   const response = await fetch('/getplayers');
+  //   const body = await response.json();
 
-    if (response.status !== 200) throw Error(body.message);
+  //   if (response.status !== 200) throw Error(body.message);
 
-    return body;
-  };
+  //   return body;
+  // };
 
   render() {
     return (
