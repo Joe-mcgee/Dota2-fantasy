@@ -23,9 +23,6 @@ function createTimePad(series = 10, timeout = 1000) {
 
 module.exports = (knex) => {
 
-
-
-
 router.get('/getplayers', (req, res) => {
     request.get({
         'uri': `http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/info.json?api_key=${process.env.SPORT_TRADER_KEY}`
@@ -57,9 +54,11 @@ router.get('/getplayers', (req, res) => {
               teamName: resObj.team.name,
               nickName: resObj.players[j].nickname
             };
-            knex.insert(dbPlayerObj).into('players').then((response) => {
+
+          /*  knex.insert(dbPlayerObj).into('players').then((response) => {
               console.log(response)
-            })
+            })*/
+
 
             }
           }

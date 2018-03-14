@@ -10,7 +10,8 @@ class App extends Component {
   }
 
 
-  componentDidMount() {
+
+/*  componentDidMount() {
     this.callApi()
       .then(res => {
         console.log(res.players)
@@ -29,7 +30,8 @@ class App extends Component {
     if (response.status !== 200) throw Error(body.message);
 
     return body;
-  };
+  };*/
+
 
   render() {
     return (
