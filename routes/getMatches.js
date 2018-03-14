@@ -23,7 +23,9 @@ function pushMatchesToDb(todaysMatches, knex) {
       knex.insert({teamOne: match.competitors[0].id,
                   teamTwo: match.competitors[1].id,
                   scheduled: time,
-                  apiMatchId: apiMatchId}).into('matches').then(() => {
+                  apiMatchId: apiMatchId,
+                  teamOneScore: 0,
+                  teamTwoScore: 0}).into('matches').then(() => {
                     console.log('coolbeans')
                   })
     })
