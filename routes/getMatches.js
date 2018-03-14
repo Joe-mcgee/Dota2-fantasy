@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const request = require('request-promise');
-const createTimePad = require('./timePad.js')
+const timePadPkg = require('./timePad.js')
 
 
 function filterMatches(matches, DateCheck) {
@@ -16,6 +16,32 @@ function filterMatches(matches, DateCheck) {
   return todaysMatches
 }
 
+function pushMatchesToDb(todaysMatches, knex) {
+  todaysMatches.forEach((match) => {
+      const time = match.scheduled;
+      const apiMatchId = match.id;
+      knex.insert({teamOne: match.competitors[0].id,
+                  teamTwo: match.competitors[1].id,
+                  scheduled: time,
+                  apiMatchId: apiMatchId}).into('matches').then(() => {
+                    console.log('coolbeans')
+                  })
+    })
+}
+
+function playerList(todaysMatches) {
+  const competitors = [];
+  todaysMatches.forEach((match) => {
+      if (!competitors.includes(match.competitors[0].id)) {
+        competitors.push(match.competitors[0].id)
+      }
+      if (!competitors.includes(match.competitors[1].id)) {
+        competitors.push(match.competitors[1].id)
+      }
+  })
+  return competitors
+}
+
 module.exports = (knex) => {
 
   router.get('/todays_matches', (req, res) => {
@@ -26,20 +52,31 @@ module.exports = (knex) => {
     })
     .then((matches) => {
     let todaysMatches = filterMatches(matches, DateCheck);
-    todaysMatches.forEach((match) => {
-      const time = match.scheduled;
-      const apiMatchId = match.id;
-      knex.insert({teamOne: match.competitors[0].name,
-                  teamTwo: match.competitors[1].name,
-                  scheduled: time,
-                  ApiMatchId: apiMatchId}).into('matches').then(() => {
-                    console.log('coolbeans')
-                  })
+    const competitors = playerList(todaysMatches);
+    const timePad = timePadPkg.createTimePad(1, 10e2);
+    console.log(timePad)
+    let ps = [];
+    for (let i = 0; i < competitors.length; i++) {
+          const competitor_profiles = {
+            uri: `http://api.sportradar.us/dota2-t1/en/teams/${competitors[i]}/profile.json?api_key=${process.env.SPORT_TRADER_KEY}`,
+            json: true
+          };
+          ps.push(timePad().then(() => request(competitor_profiles)));
+        }
+      return Promise.all(ps)
+        .then((profiles) => {
+          profiles.forEach((profile) => {
+            knex.insert({ApiId: profile.team.id,
+                         name: profile.team.name,
+                         logo: profile.logo.url})
+            .into('competitors')
+            .then(() => {
+            })
+          })
+        pushMatchesToDb(todaysMatches, knex)
+        res.send('cool beans')
+        })
     })
-    res.send('coolbeans')
-    })
-
-
   })
 
   return router;
