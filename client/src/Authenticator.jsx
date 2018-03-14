@@ -21,7 +21,7 @@ class Authenticator extends Component {
         <label htmlFor='password'>password: </label>
         <input type='password' name='password' />
       </form>
-      <button type='submit' form='register' value='Submit'>Submit</button>
+      <button type='submit' form='register' value='Submit' className ='btn btn-primary'>Submit</button>
       </li>
       <li>
         <form action="http://localhost:5000/login" method="POST" id='login'>

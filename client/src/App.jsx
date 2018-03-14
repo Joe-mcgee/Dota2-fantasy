@@ -10,6 +10,7 @@ class App extends Component {
   }
 
 
+
 /*  componentDidMount() {
     this.callApi()
       .then(res => {
@@ -30,6 +31,7 @@ class App extends Component {
 
     return body;
   };*/
+
 
   render() {
     return (
