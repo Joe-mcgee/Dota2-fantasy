@@ -6,7 +6,7 @@ const knex = require('knex')(knexConfig[ENV]);
 const bodyParser = require('body-parser');
 
 const request = require('request-promise');
-const strint = require('./strint/strint.js');
+
 
 
 
@@ -25,17 +25,19 @@ const authenticateRoutes = require('./routes/authenticate');
 const registerRoutes = require('./routes/register');
 const createTeamRoutes = require('./routes/create_team');
 const getPlayerResults = require('./routes/get_results');
+const getTodaysMatches = require('./routes/getMatches');
 
 app.use('/', authenticateRoutes());
 app.use('/', registerRoutes(knex));
 app.use('/', createTeamRoutes(knex));
 app.use('/', getPlayerResults(knex));
+app.use('/', getTodaysMatches(knex));
 
 
 app.get('/api/hello', (req, res) => {
  request.get({
       "uri": `http://api.sportradar.us/dota2-t1/en/schedules/2018-03-08/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
-    }).pipe(res)
+    }).pipe(res);
   });
 
 

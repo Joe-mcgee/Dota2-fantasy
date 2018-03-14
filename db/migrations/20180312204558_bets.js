@@ -4,9 +4,9 @@ exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTable('teams', function(table) {
       table.increments();
-      table.integer('points');
-      table.integer('players_id').unsigned();
-      table.foreign('players_id').references('id').inTable('players');
+      table.integer('tokens');
+      table.integer('matches_id').unsigned();
+      table.foreign('matches_id').references('id').inTable('matches');
       table.integer('users_id').unsigned();
       table.foreign('users_id').references('id').inTable('users');
 
