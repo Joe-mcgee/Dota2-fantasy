@@ -6,6 +6,8 @@ exports.up = function(knex, Promise) {
       table.string('teamTwo');
       table.string('scheduled');
       table.string('apiMatchId');
+      table.string('teamOneScore');
+      table.string('teamTwoScore');
 
 
 

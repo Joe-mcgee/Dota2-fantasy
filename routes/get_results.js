@@ -41,7 +41,35 @@ function burrowMatches(outputs, hardCodedPlayers) {
 module.exports = (knex) => {
 
   router.get('/getresults', (req, res) => {
-    const hardCodedPlayers = ["Sakata", "Raven", "fn"]
+    const timePad = createTimePad(1, 10e2);
+    knex.select('apiMatchId').from('matches').then((matches) => {
+      console.log(matches[0].apiMatchId)
+      const ps = [];
+      for (let i = 0; i < matches.length; i ++) {
+        const match_details = {
+            uri: `http://api.sportradar.us/dota2-t1/en/matches/${matches[i].apiMatchId}/summary.json?api_key=${process.env.SPORT_TRADER_KEY}`,
+            json: true
+          };
+          ps.push(timePad().then(() => request(match_details)));
+      }
+      return Promise.all(ps)
+      .then((outcomes) => {
+
+        outcomes.forEach((outcome) => {
+          console.log(outcome.sport_event_status.home_score)
+          knex('matches').where('apiMatchId', outcome.sport_event.id)
+          .update({teamOneScore: outcome.sport_event_status.home_score,
+                   teamTwoScore: outcome.sport_event_status.away_score
+                 }).then((count) => { console.log(count)})
+
+        })
+        res.send('cool beans')
+      })
+    })
+
+
+
+/*
     request.get({
       uri: `http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
     })
@@ -55,7 +83,6 @@ module.exports = (knex) => {
           }
         });
 
-        const timePad = createTimePad(1, 10e2);
         let ps = [];
         for (let i = 0; i < matches.length; i++) {
           const match_details = {
@@ -73,6 +100,7 @@ module.exports = (knex) => {
       });
 
   });
-
+*/
+})
   return router;
-};
+}
