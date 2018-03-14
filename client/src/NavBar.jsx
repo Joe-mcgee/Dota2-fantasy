@@ -9,11 +9,15 @@ class NavBar extends Component {
   render() {
 
     return (
-      <nav className="navbar">
+
+      <div className="p-3 mb-2 bg-warning text-dark">
+      <nav className="navbar navbar-light bg-light">
+      <div className="p-3 mb-2 bg-warning text-dark">
         <a href="/" className="navbar-brand">Future Name</a>
         <Authenticator />
-
+</div>
       </nav>
+      </div>
       );
   }
 }

@@ -34,11 +34,24 @@ class App extends Component {
   render() {
     return (
       <div>
-      <NavBar />
-      <h1>Hello React :)</h1>
-      <p>{this.state.response}</p>
+        <div className="container-fluid">
+          <NavBar />
+        </div>
+
+        <p>{this.state.response}</p>
+          <ul className="nav nav-pills nav-fill">
+            <li className="nav-item">
+             <a className="nav-link " href="#">Ready to go</a>
+            </li>
+              <li className="nav-item">
+            <a className="nav-link " href="#">Get more token</a>
+            </li>
+          </ul>
+        <button type="button" className="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+        back to login
+      </button>
       </div>
-    );
+   );
   }
 }
 
