@@ -25,11 +25,13 @@ const authenticateRoutes = require('./routes/authenticate');
 const registerRoutes = require('./routes/register');
 const createTeamRoutes = require('./routes/create_team');
 const getPlayerResults = require('./routes/get_results');
+const getTodaysMatches = require('./routes/getMatches');
 
 app.use('/', authenticateRoutes());
 app.use('/', registerRoutes(knex));
 app.use('/', createTeamRoutes(knex));
 app.use('/', getPlayerResults(knex));
+app.use('/', getTodaysMatches(knex));
 
 
 app.get('/api/hello', (req, res) => {

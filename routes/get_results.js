@@ -41,7 +41,7 @@ function burrowMatches(outputs, hardCodedPlayers) {
 module.exports = (knex) => {
 
   router.get('/getresults', (req, res) => {
-    const hardCodedPlayers = ["KuKu", "Raven", "fn"]
+    const hardCodedPlayers = ["Sakata", "Raven", "fn"]
     request.get({
       uri: `http://api.sportradar.us/dota2-t1/en/tournaments/sr:tournament:13911/schedule.json?api_key=${process.env.SPORT_TRADER_KEY}`
     })

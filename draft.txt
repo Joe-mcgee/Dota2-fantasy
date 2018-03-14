@@ -41,3 +41,56 @@ filter tournament round : group A && scheduled matching date
 get match id
 
 2.
+
+
+
+
+
+exports.seed = function(knex, Promise) {
+   return knex('teams').del()
+    .then(function() {
+      return;
+    })
+    .then(() => {
+      return Promise.all([
+        knex('teams').insert({
+          points: 0,
+          players_id: 3,
+          users_id: 1
+
+        }),
+        knex('teams').insert({
+          points: 0,
+          players_id: 42,
+          users_id: 2
+        }),
+        knex('teams').insert({
+          points: 0,
+          players_id: 14,
+          users_id: 3
+        })
+        ])
+    });
+  }
+
+
+
+exports.seed = function(knex, Promise) {
+  return Promise.all([
+    knex('users').insert({
+      name: 'Taylor',
+      email: 'thulsmans.2994@me.com',
+      password: 'topsecret'
+    }),
+    knex('users').insert({
+      name: 'Joe',
+      email: 'joe.2994@me.com',
+      password: 'topsecret'
+    }),
+    knex('users').insert({
+      name: 'Bob',
+      email: 'Bob.2994@me.com',
+      password: 'topsecret'
+    })
+  ]);
+};
