@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import NavBar from './NavBar.jsx'
+import NavBar from './NavBar.jsx';
+import MatchDetail from './MatchDetail.jsx';
 
 class App extends Component {
   constructor() {
@@ -38,6 +39,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
+        <MatchDetail />
       </div>
    );
   }
