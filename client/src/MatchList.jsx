@@ -49,15 +49,13 @@ class MatchList extends Component {
   };
  render() {
 
-<<<<<<< HEAD
   render() {
     const matchList = this.state.games.map((game) => {
-      return (<Message key={game.id} time={game.scheduled} teamOneName={game.teamOneName} teamTwoName={game.teamTwoName} teamOneLogo={game.teamOneLogo} teamTwoLogo={game.teamTwoLogo} )
-    })
+      return (<Message key={game.id} time={game.scheduled} teamOneName={game.teamOneName} teamTwoName={game.teamTwoName} teamOneLogo={game.teamOneLogo} teamTwoLogo={game.teamTwoLogo}/> );
+
+    });
 
 
-=======
->>>>>>> 9997d371c6234b73c34cd0b210340c2b41682436
     return (
     <div className="card">
         <div className="card-header">
