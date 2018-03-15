@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import MatchDetail from './MatchDetail.jsx';
 
 const styleA = {
   bontSize:'86px'
@@ -47,13 +47,17 @@ class MatchList extends Component {
 
     return body;
   };
+ render() {
 
+<<<<<<< HEAD
   render() {
     const matchList = this.state.games.map((game) => {
       return (<Message key={game.id} time={game.scheduled} teamOneName={game.teamOneName} teamTwoName={game.teamTwoName} teamOneLogo={game.teamOneLogo} teamTwoLogo={game.teamTwoLogo} )
     })
 
 
+=======
+>>>>>>> 9997d371c6234b73c34cd0b210340c2b41682436
     return (
     <div className="card">
         <div className="card-header">
@@ -64,6 +68,7 @@ class MatchList extends Component {
                 <li className="nav-item"><a className="nav-link" href="#">Match 3</a></li>
             </ul>
         </div>
+        <MatchDetail />
         </div>
 
 
