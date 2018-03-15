@@ -1,3 +1,38 @@
+import React, {Component} from 'react';
+
+const styleA = {
+  bontSize:'86px'
+}
+
+const styleB = {
+backgroundColor: 'rgb(245,245,245)'
+}
+
+const styleC = {
+height:'60px',
+backgroundColor:'#fca311'
+}
+const styleD = {
+  color:'rgb(255,255,255)'
+}
+
+const styleE = {
+backgroundColor:'rgb(245,245,245)'
+}
+
+const styleF = {
+height:'60px',
+backgroundColor:'#fca311'
+}
+
+class MatchDetail extends Component {
+  constructor() {
+    super()
+  }
+
+render() {
+    return (
+
 <div className="card-body">
             <h4 className="text-center card-title" style={styleA}>we should set up a timer here</h4>
             <div className="row">
@@ -53,3 +88,9 @@
                 </div>
             </div>
         </div>
+
+    );
+   }
+}
+
+export default MatchDetail;

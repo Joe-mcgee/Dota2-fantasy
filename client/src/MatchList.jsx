@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import MatchDetail from './MatchDetail.jsx';
 
 const styleA = {
   bontSize:'86px'
@@ -47,8 +47,8 @@ class MatchList extends Component {
 
     return body;
   };
+ render() {
 
-  render() {
     return (
     <div className="card">
         <div className="card-header">
@@ -59,6 +59,7 @@ class MatchList extends Component {
                 <li className="nav-item"><a className="nav-link" href="#">Match 3</a></li>
             </ul>
         </div>
+        <MatchDetail />
         </div>
 
 
