@@ -32,7 +32,6 @@ class NavBar extends Component {
                     <ul className="nav navbar-nav mr-auto"></ul><span className="navbar-text actions"><button className="btn btn-primary" type="button" style={styleC}>Log Out</button></span></div>
             </div>
         </nav>
-
       </div>
       );
   }
