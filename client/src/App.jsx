@@ -6,44 +6,38 @@ import Footer from './Footer.jsx';
 class App extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      games: null,
+    }
   }
 
-
-
-/*  componentDidMount() {
-    this.callApi()
-      .then(res => {
-        console.log(res.players)
-        const nicknames = [];
-        res.players.forEach((player) => {
-        nicknames.push(player.nickname)
-        })
-        this.setState({ response: nicknames })})
-      .catch(err => console.log(err));
+  componentDidMount(done) {
+    this.callTodaysMatches();
   }
 
-  callApi = async () => {
-    const response = await fetch('/getplayers');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };*/
-
+  callTodaysMatches() {
+    fetch('/api/getMatchesFromDb')
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      this.setState({games: json})
+    })
+  }
 
 
 
   render() {
+    if (this.state.games && this.state) {
     return (
       <div>
         <NavBar />
-        <MatchList />
+        <MatchList todaysMatches={this.state.games} />
         <Footer />
       </div>
    );
   }
+  return (<div>Loading...</div>)
+    }
 }
 
 // api https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=3719509349&key=FF967EC4968D206F9FA1485AC5F6E162
