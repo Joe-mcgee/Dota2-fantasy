@@ -85,6 +85,7 @@ console.log(this.state.games)
                 {this.getMatchList()}
             </ul>
         </div>
+        <MatchDetail />
 
         </div>
 
