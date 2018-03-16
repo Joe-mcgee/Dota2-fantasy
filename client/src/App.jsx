@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import NavBar from './NavBar.jsx';
 import MatchList from './MatchList.jsx';
+import Footer from './Footer.jsx';
 
 class App extends Component {
   constructor() {
@@ -40,6 +40,7 @@ class App extends Component {
       <div>
         <NavBar />
         <MatchList />
+        <Footer />
       </div>
    );
   }

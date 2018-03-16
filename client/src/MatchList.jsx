@@ -1,30 +1,6 @@
 import React, {Component} from 'react';
 import MatchDetail from './MatchDetail.jsx';
 
-const styleA = {
-  bontSize:'86px'
-}
-
-const styleB = {
-backgroundColor: 'rgb(245,245,245)'
-}
-
-const styleC = {
-height:'60px',
-backgroundColor:'#fca311'
-}
-const styleD = {
-  color:'rgb(255,255,255)'
-}
-
-const styleE = {
-backgroundColor:'rgb(245,245,245)'
-}
-
-const styleF = {
-height:'60px',
-backgroundColor:'#fca311'
-}
 
 class MatchList extends Component {
   constructor() {

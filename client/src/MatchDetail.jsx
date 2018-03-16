@@ -20,10 +20,6 @@ const styleE = {
 backgroundColor:'rgb(245,245,245)'
 }
 
-const styleF = {
-height:'60px',
-backgroundColor:'#fca311'
-}
 
 class MatchDetail extends Component {
   constructor() {
