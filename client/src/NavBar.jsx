@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Authenticator from './Authenticator.jsx';
+import Timer from './timer.jsx';
 
 const styleA = {
   backgroundColor: 'rgb(14,14,14)'
@@ -19,9 +20,6 @@ const styleC = {
   top: '5px'
 }
 
-/*
-* Child Component
-*/
 
 class NavBar extends Component {
   render() {

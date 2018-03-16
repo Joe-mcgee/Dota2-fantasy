@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar.jsx';
 import MatchList from './MatchList.jsx';
 import Footer from './Footer.jsx';
+import Timer from './timer.jsx';
 
 class App extends Component {
   constructor() {
@@ -40,6 +41,7 @@ class App extends Component {
       <div>
         <NavBar />
         <MatchList />
+        <Timer />
         <Footer />
       </div>
    );
