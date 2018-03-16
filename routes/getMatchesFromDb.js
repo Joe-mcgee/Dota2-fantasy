@@ -11,7 +11,6 @@ module.exports = (knex) => {
       .from('matches').where('scheduled', 'like', '2017-08-03%').then((matches) => {
         Promise.all(matches.map(match => {
           return knex.select('name', 'logo').from('competitors').where('ApiId', match.teamOne).then((first) => {
-            console.log(first)
             match['teamOneName'] = first[0].name;
             match['teamOneLogo'] = first[0].logo;
             return knex.select('name', 'logo').from('competitors').where('ApiId', match.teamTwo).then((second) => {

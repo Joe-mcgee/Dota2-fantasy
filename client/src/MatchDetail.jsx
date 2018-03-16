@@ -34,7 +34,7 @@ render() {
             <div className="row">
                 <div className="col">
                     <div className="card" style={styleB}>
-                        <h4 className="text-center">we should load team name here</h4>
+                        <h4 className="text-center">{this.props.teamOneName}</h4>
                         <div className="card-body">
                             <div className="container">
                                 <div className="row">

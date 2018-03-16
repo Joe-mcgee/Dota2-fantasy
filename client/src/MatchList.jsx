@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
 import MatchDetail from './MatchDetail.jsx';
 
+/*const Route = require('react-router-dom').Route;
+const Link = require('react-router-dom')*/
 
 class MatchList extends Component {
 
@@ -8,12 +11,12 @@ class MatchList extends Component {
     super()
     this.state = {games: []}
     this.getMatchList = this.getMatchList.bind(this);
+    this.getMatchDetails = this.getMatchDetails.bind(this);
   }
 
   componentWillMount(done) {
     this.callTodaysMatches()
     .then(res => {
-      console.log(res)
       this.setState({games: res}, done)
     }).catch(err => console.log(err));
 
@@ -46,7 +49,7 @@ class MatchList extends Component {
       let url = "/matches/" + game.apiMatchId
       return (
               (game.id < 4) ?
-              <li className="nav-item"><a className="nav-link active" href={url}><strong>{
+              <li key={game.id} className="nav-item"><a className="nav-link active" href={url}><strong>{
 game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
                 : null
 
@@ -60,24 +63,40 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
                   // }
 
 
-/*      <MatchDetail key={game.id} time={game.scheduled}
-      teamOneName={game.teamOneName}
-      teamTwoName={game.teamTwoName}
-      teamOneLogo={game.teamOneLogo}
-      teamTwoLogo={game.teamTwoLogo}
-      teamOneScore={game.teamOneScore}
-      teamTwoScore={game.teamTwoScore}/>*/
+
 
        );
 
     });
-    console.log('getmatchlist', matchList)
     return matchList
   }
 
+
+  getMatchDetails() {
+
+    const matchDetailRoutes = this.state.games.map((game) => {
+      let url = "/matches/" + game.apiMatchId
+      const props = {
+        teamOneName: game.teamOneName,
+          teamTwoName: game.teamTwoName,
+          teamOneLogo: game.teamOneLogo,
+          teamTwoLogo: game.teamTwoLogo,
+          teamOneScore: game.teamOneScore,
+          teamTwoScore: game.teamTwoScore
+      }
+      const matchDetailPage = () => {
+        return (
+          <MatchDetail {...props} />
+          )
+      }
+
+      return ( <Route exact path={url} component={matchDetailPage} />
+      )
+    })
+    return matchDetailRoutes;
+  }
+
   render() {
-console.log('render');
-console.log(this.state.games)
     return (
     <div className="card">
         <div className="card-header">
@@ -85,7 +104,7 @@ console.log(this.state.games)
                 {this.getMatchList()}
             </ul>
         </div>
-        <MatchDetail />
+        {this.getMatchDetails}
 
         </div>
 
