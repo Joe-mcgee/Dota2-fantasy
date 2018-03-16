@@ -55,7 +55,7 @@ class MatchList extends Component {
 
 
   callTodaysMatches = async () => {
-    const response = await fetch('http://localhost:5000/getMatchesFromDb')
+    const response = await fetch('/api/getMatchesFromDb')
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
