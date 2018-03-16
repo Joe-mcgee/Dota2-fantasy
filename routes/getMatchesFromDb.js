@@ -17,7 +17,6 @@ module.exports = (knex) => {
             return knex.select('name', 'logo').from('competitors').where('ApiId', match.teamTwo).then((second) => {
               match['teamTwoName'] = second[0].name;
               match['teamTwoLogo'] = second[0].logo;
-              console.log(match)
               return match
             })
           });
