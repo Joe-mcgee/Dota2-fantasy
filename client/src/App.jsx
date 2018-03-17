@@ -32,12 +32,10 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-<<<<<<< HEAD
-        <MatchList />
         <Timer />
-=======
+
         <MatchList todaysMatches={this.state.games} />
->>>>>>> 5105c36e5040ef19aec0426e49e10a9380d0dc1f
+
         <Footer />
       </div>
    );
