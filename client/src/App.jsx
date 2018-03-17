@@ -7,45 +7,43 @@ import Timer from './timer.jsx';
 class App extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      games: null,
+    }
   }
 
-
-
-/*  componentDidMount() {
-    this.callApi()
-      .then(res => {
-        console.log(res.players)
-        const nicknames = [];
-        res.players.forEach((player) => {
-        nicknames.push(player.nickname)
-        })
-        this.setState({ response: nicknames })})
-      .catch(err => console.log(err));
+  componentDidMount(done) {
+    this.callTodaysMatches();
   }
 
-  callApi = async () => {
-    const response = await fetch('/getplayers');
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };*/
-
+  callTodaysMatches() {
+    fetch('/api/getMatchesFromDb')
+    .then(response => response.json())
+    .then(json => {
+      console.log(json)
+      this.setState({games: json})
+    })
+  }
 
 
 
   render() {
+    if (this.state.games && this.state) {
     return (
       <div>
         <NavBar />
+<<<<<<< HEAD
         <MatchList />
         <Timer />
+=======
+        <MatchList todaysMatches={this.state.games} />
+>>>>>>> 5105c36e5040ef19aec0426e49e10a9380d0dc1f
         <Footer />
       </div>
    );
   }
+  return (<div>Loading...</div>)
+    }
 }
 
 // api https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=3719509349&key=FF967EC4968D206F9FA1485AC5F6E162

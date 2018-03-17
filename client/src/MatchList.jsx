@@ -1,52 +1,40 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import MatchDetail from './MatchDetail.jsx';
+import App from './App.jsx';
+import ToggleDisplay from 'react-toggle-display';
 
+/*const Route = require('react-router-dom').Route;
+const Link = require('react-router-dom')*/
 
 class MatchList extends Component {
 
   constructor(props) {
-    super()
-    this.state = {games: []}
+    super(props)
+    this.state = {
+      show: null
+    }
     this.getMatchList = this.getMatchList.bind(this);
+    this.getMatchDetails = this.getMatchDetails.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  componentWillMount(done) {
-    this.callTodaysMatches()
-    .then(res => {
-      console.log(res)
-      this.setState({games: res}, done)
-    }).catch(err => console.log(err));
-
+  handleClick(evt, id) {
+    evt.preventDefault()
+    this.setState({
+      show: id
+    })
   }
 
-/*    componentDidMount() {
-    this.callTodaysMatches()
-    .then(res => {
-      console.log(res)
-      this.setState({games: res})
-    }).catch(err => console.log(err));
-
-  }
-*/
-
-
-  callTodaysMatches = async () => {
-    const response = await fetch('/api/getMatchesFromDb')
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
 
   getMatchList() {
   let MAX_TABS = 2;
   let MAX_LINES_IN_COLUMNS = 18;
-    const matchList = this.state.games.map((game) => {
+    const matchList = this.props.todaysMatches.map((game) => {
       let url = "/matches/" + game.apiMatchId
       return (
               (game.id < 4) ?
-              <li className="nav-item"><a className="nav-link active" href={url}><strong>{
+              <li key={game.id} className="nav-item"><a onClick={(evt) => this.handleClick(evt, game.apiMatchId)}className='nav-link active' href={url}><strong>{
 game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
                 : null
 
@@ -59,25 +47,45 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
 
                   // }
 
-
-/*      <MatchDetail key={game.id} time={game.scheduled}
-      teamOneName={game.teamOneName}
-      teamTwoName={game.teamTwoName}
-      teamOneLogo={game.teamOneLogo}
-      teamTwoLogo={game.teamTwoLogo}
-      teamOneScore={game.teamOneScore}
-      teamTwoScore={game.teamTwoScore}/>*/
-
        );
 
     });
-    console.log('getmatchlist', matchList)
     return matchList
   }
 
+
+  getMatchDetails() {
+    console.log(this.props)
+    console.log(this.state)
+    const matchDetails = this.props.todaysMatches.map((game) => {
+      const props = {
+        apiMatchId: game.apiMatchId,
+        teamOneName: game.teamOneName,
+          teamTwoName: game.teamTwoName,
+          teamOneLogo: game.teamOneLogo,
+          teamTwoLogo: game.teamTwoLogo,
+          teamOneScore: game.teamOneScore,
+          teamTwoScore: game.teamTwoScore,
+   }
+      if (this.state.show === game.apiMatchId) {
+      return (
+              <MatchDetail {...props} />
+      )
+    }
+    })
+    console.log(matchDetails)
+    return matchDetails;
+  }
+
+  addSwitch = () => {
+    return ( <Switch>
+            <Route exact path='/matches' component={App} />
+            {this.getMatchDetails()}
+            </Switch>
+      )
+  }
+
   render() {
-console.log('render');
-console.log(this.state.games)
     return (
     <div className="card">
         <div className="card-header">
@@ -85,9 +93,11 @@ console.log(this.state.games)
                 {this.getMatchList()}
             </ul>
         </div>
-        <MatchDetail />
+
+        {this.getMatchDetails()}
 
         </div>
+
 
 
     );
@@ -95,3 +105,14 @@ console.log(this.state.games)
 }
 
 export default MatchList;
+
+
+/*    componentDidMount() {
+    this.callTodaysMatches()
+    .then(res => {
+      console.log(res)
+      this.setState({games: res})
+    }).catch(err => console.log(err));
+
+  }
+*/
