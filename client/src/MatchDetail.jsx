@@ -48,7 +48,7 @@ render() {
                                         </div>
                                         <div className="row"></div>
                                     </div>
-                                    <div className="col"><img/></div>
+                                    <div className="col"><img src={this.props.teamOneLogo} /></div>
                                 </div>
                             </div>
                         </div>
@@ -59,11 +59,11 @@ render() {
                 </div>
                 <div className="col">
                     <div className="card" style={styleE}>
-                        <h4 className="text-center">we should load team name here</h4>
+                        <h4 className="text-center">{this.props.teamTwoName}</h4>
                         <div className="card-body">
                             <div className="container">
                                 <div className="row">
-                                    <div className="col"><img/></div>
+                                    <div className="col"><img src={this.props.teamTwoLogo}/></div>
                                     <div className="col-lg-4">
                                         <div className="row"></div>
                                         <div className="row">
