@@ -61,6 +61,7 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
       const props = {
         apiMatchId: game.apiMatchId,
         teamOneName: game.teamOneName,
+        schedule: game.scheduled,
           teamTwoName: game.teamTwoName,
           teamOneLogo: game.teamOneLogo,
           teamTwoLogo: game.teamTwoLogo,
