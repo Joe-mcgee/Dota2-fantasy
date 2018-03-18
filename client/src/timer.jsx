@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Timer extends React.Component {
   constructor() {
     super();
-    this.state = { time: {}, seconds: 3500 };
+    this.state = { time: {}, seconds: 1000 };
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
@@ -32,7 +32,7 @@ class Timer extends React.Component {
   }
 
   startTimer() {
-    if (this.timer == 0) {
+    if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   }
@@ -46,11 +46,11 @@ class Timer extends React.Component {
     });
 
     // Check if we're at zero.
-    if (seconds == 0) {
+    if (seconds === 0) {
       clearInterval(this.timer);
     }
   }
-
+// how to set up a tiemr without click start
   render() {
     return(
       <div>
