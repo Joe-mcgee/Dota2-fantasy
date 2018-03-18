@@ -2,8 +2,14 @@ import React, {Component} from 'react';
 
 const styleA = {
 
+  right: '100px',
+  top: '5px'
+
 }
 const styleB = {
+  position: 'absolute',
+  right: '100px',
+  top: '5px'
 
 }
 const styleC = {

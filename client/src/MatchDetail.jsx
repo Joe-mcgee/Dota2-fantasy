@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
+import Timer from './timer.jsx';
+
 
 const styleA = {
-  bontSize:'86px'
+  bontSize:'86px',
 }
 
 const styleB = {
@@ -20,17 +22,26 @@ const styleE = {
 backgroundColor:'rgb(245,245,245)'
 }
 
+const styleF = {
+textAlign:'center'
+}
+
 
 class MatchDetail extends Component {
   constructor() {
     super()
   }
 
+  updateMatchInfo(){
+    fetch('http://localhost:5000/updateScore').then();
+  }
+
 render() {
     return (
 
 <div className="card-body">
-            <h4 className="text-center card-title" style={styleA}>we should set up a timer here</h4>
+            <h4 className="text-center card-title" style={styleA}><Timer {...this.props}/></h4>
+            <button onClick={this.updateMatchInfo}  style={styleF}>upgrade</button>
             <div className="row">
                 <div className="col">
                     <div className="card" style={styleB}>
@@ -42,7 +53,7 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">Investors</h4>
+                                                <h4 className="text-center">{this.props.teamOneScore}</h4>
                                                 <h4 className="text-center">show number of people </h4>
                                             </div>
                                         </div>
@@ -68,7 +79,7 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">Investors</h4>
+                                                <h4 className="text-center">{this.props.teamTwoScore}</h4>
                                                 <h4 className="text-center">show number of people </h4>
                                             </div>
                                         </div>

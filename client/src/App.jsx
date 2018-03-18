@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar.jsx';
 import MatchList from './MatchList.jsx';
 import Footer from './Footer.jsx';
-import Timer from './timer.jsx';
+
 
 class App extends Component {
   constructor() {
@@ -32,7 +32,6 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Timer />
 
         <MatchList todaysMatches={this.state.games} />
 

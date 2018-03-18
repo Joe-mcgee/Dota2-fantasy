@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 
 class Timer extends React.Component {
-  constructor() {
-    super();
-    this.state = { time: {}, seconds: 1000 };
+  constructor(props) {
+    super(props);
+    this.state = { endTime: Date.parse(props.schedule) }; // the time here should be the schedual time - current time
     this.timer = 0;
     this.startTimer = this.startTimer.bind(this);
     this.countDown = this.countDown.bind(this);
   }
 
   secondsToTime(secs){
-    let hours = Math.floor(secs / (60 * 60));
-
-    let divisor_for_minutes = secs % (60 * 60);
-    let minutes = Math.floor(divisor_for_minutes / 60);
-
-    let divisor_for_seconds = divisor_for_minutes % 60;
-    let seconds = Math.ceil(divisor_for_seconds);
+    var seconds = Math.floor( (secs/1000) % 60 );
+    var minutes = Math.floor( (secs/1000/60) % 60 );
+    var hours = Math.floor( (secs/(1000*60*60)) % 24 );
 
     let obj = {
       "h": hours,
@@ -27,35 +23,45 @@ class Timer extends React.Component {
   }
 
   componentDidMount() {
-    let timeLeftVar = this.secondsToTime(this.state.seconds);
-    this.setState({ time: timeLeftVar });
+    // let timeLeftVar = this.secondsToTime(this.state.seconds);
+    // this.setState({ time: timeLeftVar });
   }
 
   startTimer() {
     if (this.timer === 0) {
-      this.timer = setInterval(this.countDown, 1000);
+      var endTime = this.state.endTime;
+      var secondsToTime = this.secondsToTime;
+      this.timer = setInterval(function(){
+        var seconds = endTime - Date.parse(new Date());
+        var timeObj = secondsToTime(seconds);
+        var clock = document.getElementById('clock');
+        clock.innerHTML = 'h:'+ timeObj.h + 'm:' + timeObj.m + 's:' + timeObj.s;
+
+        // Check if we're at zero.
+        if (seconds === 0) {
+          clearInterval(this.timer);
+        }
+      }, 1000);
     }
   }
 
-  countDown() {
-    // Remove one second, set state so a re-render happens.
-    let seconds = this.state.seconds - 1;
-    this.setState({
-      time: this.secondsToTime(seconds),
-      seconds: seconds,
-    });
+  countDown(endTime) {
+    // // Remove one second, set state so a re-render happens.
+    // var seconds = this.state.seconds - 1;
+    // this.setState({
+    //   time: this.secondsToTime(seconds),
+    //   seconds: seconds,
+    // });
+    // console.log("boxuanlu")
 
-    // Check if we're at zero.
-    if (seconds === 0) {
-      clearInterval(this.timer);
-    }
   }
 // how to set up a tiemr without click start
+//h: {this.state.time.h} m: {this.state.time.m} s: {this.state.time.s}
   render() {
+    {this.startTimer()}
     return(
-      <div>
-        <button onClick={this.startTimer}>Start</button>
-        m: {this.state.time.m} s: {this.state.time.s}
+      <div id='clock'>
+
       </div>
     );
   }

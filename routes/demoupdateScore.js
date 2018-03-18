@@ -7,13 +7,15 @@ const request = require('request-promise');
 module.exports = (knex) => {
 
   router.get('/updateScore', (req, res) => {
+    console.log("boxuan");
     knex('matches').where('apiMatchId', 'sr:match:12117834')
       .update({
-        teamOneScore: 1,
+        teamOneScore: 3,
         teamTwoScore: 0
-      }).then((count) => {
-        console.log(count)
-        res.redirect('http://localhost:3000')
+      })
+      .then((count) => {
+         res.redirect('http://localhost:3000')
+        // res.success();
         return
       });
 
