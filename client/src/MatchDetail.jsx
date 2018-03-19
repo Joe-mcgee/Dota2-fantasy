@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import Timer from './timer.jsx';
+import web3 from './web3.js';
+import betting from './betting';
+
 
 
 const styleA = {
@@ -35,9 +38,55 @@ const styleH = {
 
 
 class MatchDetail extends Component {
-  constructor() {
-    super()
+
+  state = {
+    manager: '',
+    betters: [],
+    totalBets: '',
+    inputValue: [],
+    message: 'BID 0.02 ETH'
   }
+
+    async componentDidMount() {
+        const manager = await betting.methods.manager().call();
+        const betters = "Taylor"
+        //await betting.methods.betters().call();
+        const balance = await web3.eth.getBalance(betting.options.address)
+        this.setState({ manager, betters, balance })
+        console.log(betters);
+    }
+
+    onSubmit = async (event) => {
+
+      console.log(event);
+
+      event.preventDefault();
+
+      const accounts = await web3.eth.getAccounts();
+
+      this.setState({ message: 'waiting on transaction success...'})
+
+      await betting.methods.enter().send({
+        from: accounts[0],
+        value: web3.utils.toWei(this.state.value, 'ether')
+      });
+
+      this.setState({message: 'You have been entered!'});
+
+    }
+
+    onClick = async () => {
+
+      const accounts = await web3.eth.getAccounts();
+      this.setState({ message: 'Waiting on transaction Successs'})
+      await betting.methods.pickWinner().send({
+        from: accounts[0],
+
+      });
+
+      this.setState({message: 'A winner has been picked!'});
+    }
+
 
   updateMatchInfo(){
     fetch('http://localhost:5000/updateScore').then();
@@ -71,7 +120,7 @@ render() {
                             </div>
                         </div>
                         <div className="card-footer" style={styleC}>
-                            <h4 className="text-center" style={styleD}><strong>BID</strong></h4>
+                            <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
                         </div>
                     </div>
                 </div>
@@ -95,9 +144,11 @@ render() {
                                 </div>
                             </div>
                         </div>
-                        <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
-                            <h4 className="text-center" style={styleD}><strong>BID</strong></h4>
-                        </div>
+                        <form onClick={this.onSubmit}>
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
+                          </div>
+                        </form>
                     </div>
                 </div>
             </div>

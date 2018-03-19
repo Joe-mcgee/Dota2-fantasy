@@ -11,6 +11,7 @@ contract Betting {
     struct Better {
         uint[NUM_TEAMS] amountsBet;
     }
+
     mapping(address => Better) betterInfo;
     uint[NUM_TEAMS] public totalAmountsBet;
 
