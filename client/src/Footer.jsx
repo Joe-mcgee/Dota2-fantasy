@@ -14,7 +14,7 @@ class Footer extends Component {
   render() {
 
     return (
-      <div>
+
 
     <div className="footer-dark" style={styleA}>
         <footer>
@@ -23,7 +23,7 @@ class Footer extends Component {
             </div>
         </footer>
     </div>
-    </div>
+
       );
   }
 }
