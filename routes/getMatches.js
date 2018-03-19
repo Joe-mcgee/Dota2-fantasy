@@ -76,7 +76,7 @@ module.exports = (knex) => {
             })
           })
         pushMatchesToDb(todaysMatches, knex)
-        res.send('cool beans')
+        res.send('HIT THE ROUTE')
         })
     })
   })

@@ -1,73 +1,104 @@
 import React, {Component} from 'react';
+import {BrowserRouter, Route, Link, Switch} from 'react-router-dom';
 import MatchDetail from './MatchDetail.jsx';
+import App from './App.jsx';
+import ToggleDisplay from 'react-toggle-display';
 
-const styleA = {
-  bontSize:'86px'
-}
-
-const styleB = {
-backgroundColor: 'rgb(245,245,245)'
-}
-
-const styleC = {
-height:'60px',
-backgroundColor:'#fca311'
-}
-const styleD = {
-  color:'rgb(255,255,255)'
-}
-
-const styleE = {
-backgroundColor:'rgb(245,245,245)'
-}
-
-const styleF = {
-height:'60px',
-backgroundColor:'#fca311'
-}
+/*const Route = require('react-router-dom').Route;
+const Link = require('react-router-dom')*/
 
 class MatchList extends Component {
-  constructor() {
-    super()
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      show: null
+    }
+    this.getMatchList = this.getMatchList.bind(this);
+    this.getMatchDetails = this.getMatchDetails.bind(this);
+    this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidMount() {
-    this.callTodaysMatches()
-    .then(res => {
-      this.setState({games: res})
-    }).catch(err => console.log(err));
-
+  handleClick(evt, id) {
+    evt.preventDefault()
+    this.setState({
+      show: id
+    })
   }
 
-  callTodaysMatches = async () => {
-    const response = await fetch('http://localhost:5000/getMatchesFromDb')
-    const body = await response.json();
 
-    if (response.status !== 200) throw Error(body.message);
+  getMatchList() {
+  let MAX_TABS = 2;
+  let MAX_LINES_IN_COLUMNS = 18;
+    const matchList = this.props.todaysMatches.map((game) => {
+      let url = "/matches/" + game.apiMatchId
+      return (
+              (game.id < 4) ?
+              <li key={game.id} className="nav-item"><a onClick={(evt) => this.handleClick(evt, game.apiMatchId)}className='nav-link active' href={url}><strong>{
+game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
+                : null
 
-    return body;
-  };
- render() {
 
-  render() {
-    const matchList = this.state.games.map((game) => {
-      return (<Message key={game.id} time={game.scheduled} teamOneName={game.teamOneName} teamTwoName={game.teamTwoName} teamOneLogo={game.teamOneLogo} teamTwoLogo={game.teamTwoLogo}/> );
+                  // for(let i = 0; i < MAX_TABS; i++){
+                  // }
+
+
+                  // for(let i = 0; i < MAX_LINES_IN_COLUMNS; i++){
+
+                  // }
+
+       );
 
     });
+    return matchList
+  }
 
 
+  getMatchDetails() {
+    console.log(this.props)
+    console.log(this.state)
+    const matchDetails = this.props.todaysMatches.map((game) => {
+      const props = {
+        apiMatchId: game.apiMatchId,
+        teamOneName: game.teamOneName,
+        schedule: game.scheduled,
+          teamTwoName: game.teamTwoName,
+          teamOneLogo: game.teamOneLogo,
+          teamTwoLogo: game.teamTwoLogo,
+          teamOneScore: game.teamOneScore,
+          teamTwoScore: game.teamTwoScore,
+   }
+      if (this.state.show === game.apiMatchId) {
+      return (
+              <MatchDetail {...props} />
+      )
+    }
+    })
+    console.log(matchDetails)
+    return matchDetails;
+  }
+
+  addSwitch = () => {
+    return ( <Switch>
+            <Route exact path='/matches' component={App} />
+            {this.getMatchDetails()}
+            </Switch>
+      )
+  }
+
+  render() {
     return (
     <div className="card">
         <div className="card-header">
             <ul className="nav nav-tabs card-header-tabs">
-
-                <li className="nav-item"><a className="nav-link active" href="#"><strong>Match 1</strong></a></li>
-                <li className="nav-item"><a className="nav-link" href="#">Match 2</a></li>
-                <li className="nav-item"><a className="nav-link" href="#">Match 3</a></li>
+                {this.getMatchList()}
             </ul>
         </div>
-        <MatchDetail />
+
+        {this.getMatchDetails()}
+
         </div>
+
 
 
     );
@@ -75,3 +106,14 @@ class MatchList extends Component {
 }
 
 export default MatchList;
+
+
+/*    componentDidMount() {
+    this.callTodaysMatches()
+    .then(res => {
+      console.log(res)
+      this.setState({games: res})
+    }).catch(err => console.log(err));
+
+  }
+*/
