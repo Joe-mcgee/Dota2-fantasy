@@ -9,7 +9,7 @@ module.exports = (knex) => {
   router.get('/updateScore', (req, res) => {
     knex('matches').where('apiMatchId', 'sr:match:12117834')
       .update({
-        teamOneScore: 4,
+        teamOneScore: 3,
         teamTwoScore: 0
       })
       .then((count) => {

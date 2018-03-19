@@ -33,15 +33,18 @@ class Timer extends React.Component {
       var secondsToTime = this.secondsToTime;
       this.timer = setInterval(function(){
         var seconds = endTime - Date.parse(new Date());
-        var timeObj = secondsToTime(seconds);
-        var clock = document.getElementById('clock');
-        clock.innerHTML = 'h:'+ timeObj.h + 'm:' + timeObj.m + 's:' + timeObj.s;
+          if (seconds <= 0) {
+            // var timeObj = secondsToTime(seconds);
+            var clock = document.getElementById('clock');
+            clock.innerHTML = 'The bid for this match is expired';
+        } else {
+          var timeObj = secondsToTime(seconds);
+          var clock = document.getElementById('clock');
+          clock.innerHTML = 'h:'+ timeObj.h + 'm:' + timeObj.m + 's:' + timeObj.s;}
 
         // Check if we're at zero.
-        if (seconds <= 0) {
-          clearInterval(this.timer);
-        }
-      }, 1000);
+
+      });
     }
   }
 
