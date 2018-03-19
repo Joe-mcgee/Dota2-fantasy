@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './NavBar.jsx';
 import MatchList from './MatchList.jsx';
 import Footer from './Footer.jsx';
+import Picture from './Picture.jsx';
 
 
 class App extends Component {
@@ -34,7 +35,7 @@ class App extends Component {
         <NavBar />
 
         <MatchList todaysMatches={this.state.games} />
-
+        <Picture/>
         <Footer />
       </div>
    );

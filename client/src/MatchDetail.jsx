@@ -23,7 +23,14 @@ backgroundColor:'rgb(245,245,245)'
 }
 
 const styleF = {
-textAlign:'center'
+textAlign:'center',
+margin: 'auto'
+}
+const styleG = {
+  float: 'right'
+}
+const styleH = {
+  float: 'left'
 }
 
 
@@ -41,7 +48,7 @@ render() {
 
 <div className="card-body">
             <h4 className="text-center card-title" style={styleA}><Timer {...this.props}/></h4>
-            <button onClick={this.updateMatchInfo}  style={styleF}>upgrade</button>
+            <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>upgrade</button></div>
             <div className="row">
                 <div className="col">
                     <div className="card" style={styleB}>
@@ -49,6 +56,7 @@ render() {
                         <div className="card-body">
                             <div className="container">
                                 <div className="row">
+                                <div className="col"><img style={styleH} src={this.props.teamOneLogo} /></div>
                                     <div className="col-lg-4 offset-lg-0">
                                         <div className="row"></div>
                                         <div className="row">
@@ -59,7 +67,6 @@ render() {
                                         </div>
                                         <div className="row"></div>
                                     </div>
-                                    <div className="col"><img src={this.props.teamOneLogo} /></div>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +81,7 @@ render() {
                         <div className="card-body">
                             <div className="container">
                                 <div className="row">
-                                    <div className="col"><img src={this.props.teamTwoLogo}/></div>
+                                    <div className="col"><img style={styleH}src={this.props.teamTwoLogo}/></div>
                                     <div className="col-lg-4">
                                         <div className="row"></div>
                                         <div className="row">

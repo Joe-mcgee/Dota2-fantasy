@@ -14,10 +14,12 @@ const styleB = {
 const styleC = {
   backgroundColor: '#fca311',
   borderColor:'#ffba53',
-  height:'46px',
+  height:'30px',
   position: 'absolute',
   right: '10px',
-  top: '5px'
+  top: '20px',
+  textAlign:'center',
+  margin: 'auto'
 }
 
 

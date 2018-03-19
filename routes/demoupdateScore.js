@@ -7,10 +7,9 @@ const request = require('request-promise');
 module.exports = (knex) => {
 
   router.get('/updateScore', (req, res) => {
-    console.log("boxuan");
     knex('matches').where('apiMatchId', 'sr:match:12117834')
       .update({
-        teamOneScore: 3,
+        teamOneScore: 4,
         teamTwoScore: 0
       })
       .then((count) => {

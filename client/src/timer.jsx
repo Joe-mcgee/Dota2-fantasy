@@ -38,7 +38,7 @@ class Timer extends React.Component {
         clock.innerHTML = 'h:'+ timeObj.h + 'm:' + timeObj.m + 's:' + timeObj.s;
 
         // Check if we're at zero.
-        if (seconds === 0) {
+        if (seconds <= 0) {
           clearInterval(this.timer);
         }
       }, 1000);
