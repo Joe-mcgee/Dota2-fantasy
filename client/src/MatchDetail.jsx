@@ -44,30 +44,23 @@ class MatchDetail extends Component {
     betters: [],
     totalBets: '',
     inputValue: [],
-    message: 'BID 0.02 ETH'
+    message: 'BID 0.02 ETH',
   }
 
     async componentDidMount() {
         const manager = await betting.methods.manager().call();
-        const betters = "Taylor"
-        //await betting.methods.betters().call();
+        const betters = await betting.methods.getBetters().call();
         const balance = await web3.eth.getBalance(betting.options.address)
         this.setState({ manager, betters, balance })
         console.log(betters);
     }
 
+    // for betting
     onSubmit = async (event) => {
-
-
-
       event.preventDefault();
-
-      const teamNumber = this.refs['team'].value
-
+      const teamNumber = event.target.elements[0].value
       const accounts = await web3.eth.getAccounts();
-
       this.setState({ message: 'waiting on transaction success...'})
-
       await betting.methods.enter(teamNumber).send({
         from: accounts[0],
         value: web3.utils.toWei('0.02', 'ether')
@@ -77,11 +70,13 @@ class MatchDetail extends Component {
 
     }
 
+    //for determining winner
     onClick = async () => {
-
+      const winner = 0
       const accounts = await web3.eth.getAccounts();
+
       this.setState({ message: 'Waiting on transaction Successs'})
-      await betting.methods.pickWinner().send({
+      await betting.methods.pickWinner(winner).send({
         from: accounts[0],
 
       });
@@ -90,16 +85,36 @@ class MatchDetail extends Component {
     }
 
 
-  updateMatchInfo(){
-    fetch('http://localhost:5000/updateScore').then();
+  updateMatchInfo = async () => {
+    let winner = null;
+    const response = await fetch('api/updateScore')
+    console.log(this.props.teamOneScore, this.props.teamTwoScore)
+    if (this.props.teamOneScore > this.props.teamTwoScore) {
+      winner = '0'
+    }
+    if (this.props.teamOneScore < this.props.teamTwoScore) {
+      winner = '1'
+    }
+    if (this.props.teamOneScore == this.props.teamTwoScore) {
+      winner = '2'
+    }
+    console.log(winner)
+    const accounts = await web3.eth.getAccounts()
+    //update message needed
+    await betting.methods.pickWinner(winner).send({
+      from: accounts[0]
+    });
+    //new message update
   }
 
 render() {
     return (
 
 <div className="card-body">
+  <p>{this.state.betters}</p>
+  <p>{this.state.balance}</p>
             <h4 className="text-center card-title" style={styleA}><Timer {...this.props}/></h4>
-            <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>upgrade</button></div>
+            <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
             <div className="row">
                 <div className="col">
                     <div className="card" style={styleB}>
@@ -121,9 +136,14 @@ render() {
                                 </div>
                             </div>
                         </div>
-                        <div className="card-footer" style={styleC}>
+                        <form onSubmit={this.onSubmit}>
+                          <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
+                            <button type='submit'>
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
                             <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
-                        </div>
+                          </div>
+                           </button>
+                        </form>
                     </div>
                 </div>
                 <div className="col">
@@ -146,11 +166,13 @@ render() {
                                 </div>
                             </div>
                         </div>
-                        <form onClick={this.onSubmit}>
-                          <input ref='team' type='hidden' value='1'/>
+                        <form onSubmit={this.onSubmit}>
+                          <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
+                          <button type='submit'>
                           <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
                             <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
                           </div>
+                           </button>
                         </form>
                     </div>
                 </div>

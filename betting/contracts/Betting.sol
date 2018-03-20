@@ -37,7 +37,9 @@ contract Betting {
           uint betOnWinner = betterInfo[betters[i]].amountsBet[teamIdx];
           uint payout = betOnWinner + ((betOnWinner * losingChunk)/totalAmountsBet[teamIdx]);
           betters[i].transfer(payout);
+
         }
+         betters = new address[](0);
     }
 
     function getBetters() public view returns (address[]) {
