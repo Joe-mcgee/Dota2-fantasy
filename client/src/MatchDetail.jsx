@@ -68,9 +68,9 @@ class MatchDetail extends Component {
 
       this.setState({ message: 'waiting on transaction success...'})
 
-      await betting.methods.enter().send(teamNumber, {
+      await betting.methods.enter(teamNumber).send({
         from: accounts[0],
-        value: web3.utils.toWei(this.state.value, 'ether')
+        value: web3.utils.toWei('0.02', 'ether')
       });
 
       this.setState({message: 'You have been entered!'});

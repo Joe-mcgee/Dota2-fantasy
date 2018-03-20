@@ -3,8 +3,6 @@ import NavBar from './NavBar.jsx';
 import MatchList from './MatchList.jsx';
 import Footer from './Footer.jsx';
 import Picture from './Picture.jsx';
-import betting from './betting';
-
 
 class App extends Component {
   constructor() {
