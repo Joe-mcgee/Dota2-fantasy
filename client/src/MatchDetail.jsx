@@ -58,15 +58,17 @@ class MatchDetail extends Component {
 
     onSubmit = async (event) => {
 
-      console.log(event);
+
 
       event.preventDefault();
+
+      const teamNumber = this.refs['team'].value
 
       const accounts = await web3.eth.getAccounts();
 
       this.setState({ message: 'waiting on transaction success...'})
 
-      await betting.methods.enter().send({
+      await betting.methods.enter().send(teamNumber, {
         from: accounts[0],
         value: web3.utils.toWei(this.state.value, 'ether')
       });
@@ -145,6 +147,7 @@ render() {
                             </div>
                         </div>
                         <form onClick={this.onSubmit}>
+                          <input ref='team' type='hidden' value='1'/>
                           <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
                             <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
                           </div>
