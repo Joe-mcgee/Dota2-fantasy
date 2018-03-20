@@ -44,6 +44,7 @@ class MatchDetail extends Component {
     betters: [],
     totalBets: '',
     inputValue: [],
+    poolArray: [],
     message: 'BID 0.02 ETH',
   }
 
@@ -51,7 +52,8 @@ class MatchDetail extends Component {
         const manager = await betting.methods.manager().call();
         const betters = await betting.methods.getBetters().call();
         const balance = await web3.eth.getBalance(betting.options.address)
-        this.setState({ manager, betters, balance })
+        const poolArray = await betting.methods.getTotalAmountsBet().call()
+        this.setState({ manager, betters, balance, poolArray })
         console.log(betters);
     }
 
@@ -65,8 +67,9 @@ class MatchDetail extends Component {
         from: accounts[0],
         value: web3.utils.toWei('0.02', 'ether')
       });
-
+      const poolArray = await betting.methods.getTotalAmountsBet().call()
       this.setState({message: 'You have been entered!'});
+      this.setState({poolArray})
 
     }
 
@@ -98,7 +101,7 @@ class MatchDetail extends Component {
     if (this.props.teamOneScore == this.props.teamTwoScore) {
       winner = '2'
     }
-    console.log(winner)
+
     const accounts = await web3.eth.getAccounts()
     //update message needed
     await betting.methods.pickWinner(winner).send({
@@ -111,8 +114,6 @@ render() {
     return (
 
 <div className="card-body">
-  <p>{this.state.betters}</p>
-  <p>{this.state.balance}</p>
             <h4 className="text-center card-title" style={styleA}><Timer {...this.props}/></h4>
             <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
             <div className="row">
@@ -128,7 +129,7 @@ render() {
                                         <div className="row">
                                             <div className="col">
                                                 <h4 className="text-center">{this.props.teamOneScore}</h4>
-                                                <h4 className="text-center">show number of people </h4>
+                                                <h4 className="text-center">{(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
                                             </div>
                                         </div>
                                         <div className="row"></div>
@@ -158,7 +159,7 @@ render() {
                                         <div className="row">
                                             <div className="col">
                                                 <h4 className="text-center">{this.props.teamTwoScore}</h4>
-                                                <h4 className="text-center">show number of people </h4>
+                                                <h4 className="text-center">{(this.state.poolArray[1] / 1000000000000000000) / 0.02 } </h4>
                                             </div>
                                         </div>
                                         <div className="row"></div>

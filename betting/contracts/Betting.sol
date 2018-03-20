@@ -28,11 +28,7 @@ contract Betting {
     }
 
     function pickWinner(uint8 teamIdx) public {
-        // Calculate totalAmountsBet
-        // even spread transfer
         uint losingChunk = address(this).balance - totalAmountsBet[teamIdx];
-
-
         for (uint i = 0; i < betters.length; i++) {
           uint betOnWinner = betterInfo[betters[i]].amountsBet[teamIdx];
           uint payout = betOnWinner + ((betOnWinner * losingChunk)/totalAmountsBet[teamIdx]);
@@ -44,5 +40,9 @@ contract Betting {
 
     function getBetters() public view returns (address[]) {
         return betters;
+    }
+
+    function getTotalAmountsBet() public view returns(uint[NUM_TEAMS]) {
+        return totalAmountsBet;
     }
 }
