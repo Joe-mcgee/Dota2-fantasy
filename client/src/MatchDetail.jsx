@@ -38,14 +38,23 @@ const styleH = {
 
 
 class MatchDetail extends Component {
-
-  state = {
+  constructor(props) {
+    super(props)
+    this.state = {
     manager: '',
     betters: [],
     totalBets: '',
     inputValue: [],
     poolArray: [],
     message: 'BID 0.02 ETH',
+    time: true
+    }
+    var handleTimeExpiry = this.handleTimeExpiry.bind(this);
+  }
+
+
+  handleTimeExpiry() {
+    this.setState({time: false})
   }
 
     async componentDidMount() {
@@ -111,10 +120,11 @@ class MatchDetail extends Component {
   }
 
 render() {
+  const isTime = this.state.time;
     return (
 
 <div className="card-body">
-            <h4 className="text-center card-title" style={styleA}><Timer {...this.props}/></h4>
+            <h4 className="text-center card-title" style={styleA}><Timer handleTimeExpiry={this.handleTimeExpiry.bind(this)} {...this.props}/></h4>
             <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
             <div className="row">
                 <div className="col">
@@ -137,6 +147,7 @@ render() {
                                 </div>
                             </div>
                         </div>
+                        {isTime ? (
                         <form onSubmit={this.onSubmit}>
                           <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
                             <button type='submit'>
@@ -145,6 +156,11 @@ render() {
                           </div>
                            </button>
                         </form>
+                      ): (
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>Betting Expired</strong></h4>
+                          </div>
+                      )}
                     </div>
                 </div>
                 <div className="col">
@@ -167,6 +183,7 @@ render() {
                                 </div>
                             </div>
                         </div>
+                        {isTime ? (
                         <form onSubmit={this.onSubmit}>
                           <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
                           <button type='submit'>
@@ -175,6 +192,12 @@ render() {
                           </div>
                            </button>
                         </form>
+
+                          ):(
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>Betting Expired</strong></h4>
+                          </div>
+                          )}
                     </div>
                 </div>
             </div>
