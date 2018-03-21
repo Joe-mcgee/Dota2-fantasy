@@ -9,10 +9,8 @@ class NavBar extends Component {
       <div>
         <nav className="navbar navbar-light navbar-expand-md navigation-clean-button" style={style.fullNavBar}>
             <div className="container"><img src="/fantasydota-02_1024.png" style={style.logo} />
-                <Authenticator />
                     <ul className="nav navbar-nav mr-auto"></ul>
                       <span className="navbar-text actions">
-                        <button className="btn btn-primary" type="button" style={style.logout}>Log Out</button>
                       </span>
                 </div>
         </nav>
