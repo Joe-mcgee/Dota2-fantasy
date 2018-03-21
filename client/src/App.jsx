@@ -5,7 +5,6 @@ import Footer from './Footer.jsx';
 import Picture from './Picture.jsx';
 import betting from './betting';
 
-
 class App extends Component {
   constructor() {
     super();
@@ -27,10 +26,9 @@ class App extends Component {
     })
   }
 
-
-
   render() {
     if (this.state.games && this.state) {
+
     return (
       <div>
         <NavBar />
@@ -39,10 +37,12 @@ class App extends Component {
         <Picture/>
         <Footer />
       </div>
-   );
-  }
-  return (<div>Loading...</div>)
+    );
+
     }
+
+  return (<div>Loading...</div>)
+  }
 }
 
 // api https://api.steampowered.com/IDOTA2Match_570/GetMatchDetails/V001/?match_id=3719509349&key=FF967EC4968D206F9FA1485AC5F6E162
