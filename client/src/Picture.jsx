@@ -1,10 +1,29 @@
 import React, {Component} from 'react';
 
+<<<<<<< HEAD
 class Picture extends Component {
   render() {
     return (
       <div className="row">
         <div id="carouselExampleControls" className="carousel slide" data-ride="carousel"style={style.carousel}>
+=======
+const styleA = {
+  maxWidth:'100%',
+  maxHeight:'650px',
+  width:'100%',
+  height: '430px',
+}
+const styleB = {
+  width:'100%'
+}
+
+
+class Picture extends Component {
+  render() {
+    return (
+      <div>
+        <div id="carouselExampleControls" className="carousel slide col" data-ride="carousel"style={styleB}>
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
           <div className="carousel-inner">
             <div className="carousel-item active" >
               <img className="d-block w-100" src="/DOTA-TI-Vancouver-1-1068x560.jpg" alt="First slide"style={style.image}/>

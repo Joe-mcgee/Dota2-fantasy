@@ -27,7 +27,7 @@ class Timer extends React.Component {
     // this.setState({ time: timeLeftVar });
   }
 
-  startTimer() {
+  startTimer(handleTimeExpiry) {
     if (this.timer === 0) {
       var endTime = this.state.endTime;
       var secondsToTime = this.secondsToTime;
@@ -37,6 +37,8 @@ class Timer extends React.Component {
             // var timeObj = secondsToTime(seconds);
             var clock = document.getElementById('clock');
             clock.innerHTML = 'The bid for this match is expired';
+            handleTimeExpiry();
+            return
         } else {
           var timeObj = secondsToTime(seconds);
           var clock = document.getElementById('clock');
@@ -61,7 +63,8 @@ class Timer extends React.Component {
 // how to set up a tiemr without click start
 //h: {this.state.time.h} m: {this.state.time.m} s: {this.state.time.s}
   render() {
-    {this.startTimer()}
+    var handleTimeExpiry = this.props.handleTimeExpiry;
+    {this.startTimer(handleTimeExpiry)}
     return(
       <div id='clock'>
 

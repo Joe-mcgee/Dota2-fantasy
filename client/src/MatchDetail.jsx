@@ -90,8 +90,13 @@ render() {
     return (
 
 <div className="card-body">
+<<<<<<< HEAD
             <h4 className="text-center card-title" style={style.timer}><Timer handleTimeExpiry={this.handleTimeExpiry.bind(this)} {...this.props}/></h4>
             <div style={style.updateButton}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
+=======
+            <h4 className="text-center card-title" style={styleA}><Timer handleTimeExpiry={this.handleTimeExpiry.bind(this)} {...this.props}/></h4>
+            <div style={styleF}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
             <div className="row">
                 <div className="col">
                     <div className="card" style={style.leftCard}>
@@ -117,14 +122,24 @@ render() {
                         <form onSubmit={this.onSubmit}>
                           <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
                             <button type='submit'>
+<<<<<<< HEAD
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
+=======
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
                           </div>
                            </button>
                         </form>
                       ): (
+<<<<<<< HEAD
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
+=======
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>Betting Expired</strong></h4>
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
                           </div>
                       )}
                     </div>
@@ -153,6 +168,7 @@ render() {
                         <form onSubmit={this.onSubmit}>
                           <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
                           <button type='submit'>
+<<<<<<< HEAD
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
                           </div>
@@ -161,6 +177,17 @@ render() {
                           ):(
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
+=======
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>{this.state.message}</strong></h4>
+                          </div>
+                           </button>
+                        </form>
+
+                          ):(
+                          <div className="card-footer" data-bs-hover-animate="flash" style={styleC}>
+                            <h4 className="text-center" style={styleD}><strong>Betting Expired</strong></h4>
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
                           </div>
                           )}
                     </div>

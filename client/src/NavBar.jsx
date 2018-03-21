@@ -7,12 +7,21 @@ class NavBar extends Component {
 
     return (
       <div>
+<<<<<<< HEAD
         <nav className="navbar navbar-light navbar-expand-md navigation-clean-button" style={style.fullNavBar}>
             <div className="container"><img src="/fantasydota-02_1024.png" style={style.logo} />
                 <Authenticator />
                     <ul className="nav navbar-nav mr-auto"></ul>
                       <span className="navbar-text actions">
                         <button className="btn btn-primary" type="button" style={style.logout}>Log Out</button>
+=======
+        <nav className="navbar navbar-light navbar-expand-md navigation-clean-button" style={styleA}>
+            <div className="container"><img src="/fantasydota-02_1024.png" style={styleB} />
+
+                    <ul className="nav navbar-nav mr-auto"></ul>
+                      <span className="navbar-text actions">
+
+>>>>>>> 7408b0a7c45ecfc07f3e24bfe358beb75fb21c1a
                       </span>
                 </div>
         </nav>

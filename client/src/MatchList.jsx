@@ -58,6 +58,7 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
     console.log(this.state)
     const matchDetails = this.props.todaysMatches.map((game) => {
       const props = {
+        key: game.id,
         apiMatchId: game.apiMatchId,
         teamOneName: game.teamOneName,
         schedule: game.scheduled,
