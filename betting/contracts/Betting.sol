@@ -21,7 +21,7 @@ contract Betting {
         manager = msg.sender;
     }
 
-    function enter(uint8 teamIdx) public payable {
+    function enter(uint8 teamIdx) public payable restricted {
         betters.push(msg.sender);
         betterInfo[msg.sender].amountsBet[teamIdx] = msg.value;
         totalAmountsBet[teamIdx] += msg.value;
@@ -44,5 +44,14 @@ contract Betting {
 
     function getTotalAmountsBet() public view returns(uint[NUM_TEAMS]) {
         return totalAmountsBet;
+    }
+
+    modifier restricted() {
+        for (uint i = 0; i <betters.length; i++) {
+            if (msg.sender == betters[i]) {
+                revert();
+            }
+        }
+        _;
     }
 }

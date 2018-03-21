@@ -30,6 +30,7 @@ const getMatchesFromDb = require('./routes/getMatchesFromDb');
 const demoupdateScore = require('./routes/demoupdateScore');
 
 
+
 app.use('/', authenticateRoutes(knex));
 app.use('/', registerRoutes(knex));
 app.use('/', createTeamRoutes(knex));
@@ -37,6 +38,7 @@ app.use('/', getPlayerResults(knex));
 app.use('/', getTodaysMatches(knex));
 app.use('/', getMatchesFromDb(knex));
 app.use('/', demoupdateScore(knex));
+
 
 
 app.get('/api/hello', (req, res) => {

@@ -7,7 +7,7 @@ exports.seed = function(knex, Promise) {
       return knex('matches').insert([
         {id: 1, teamOne: 'sr:competitor:248711',
                 teamTwo: 'sr:competitor:300124',
-                scheduled: '2018-03-21T11:30:00+00:00',
+                scheduled: '2018-03-22T00:30:00+00:00',
                 apiMatchId: 'sr:match:12117834',
                 teamOneScore: '0',
                 teamTwoScore: '0'}

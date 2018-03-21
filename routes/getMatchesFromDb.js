@@ -8,7 +8,7 @@ module.exports = (knex) => {
   router.get('/getMatchesFromDb', (req, res) => {
     const requiredData = [];
     knex.select('*')
-      .from('matches').where('scheduled', 'like', '2018-03-21%').then((matches) => {
+      .from('matches').where('scheduled', 'like', '2018-03-22%').then((matches) => {
         Promise.all(matches.map(match => {
           return knex.select('name', 'logo').from('competitors').where('ApiId', match.teamOne).then((first) => {
             match['teamOneName'] = first[0].name;

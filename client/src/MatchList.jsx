@@ -70,20 +70,13 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
       }
 
       if (this.state.show === game.apiMatchId)
-        return (<MatchDetail {...props} />)
+        return (<MatchDetail callTodaysMatches={this.props.callTodaysMatches} {...props} />)
 
     })
     console.log(matchDetails)
     return matchDetails;
   }
 
-  addSwitch = () => {
-    return ( <Switch>
-            <Route exact path='/matches' component={App} />
-            {this.getMatchDetails()}
-            </Switch>
-    )
-  }
 
   render() {
     return (

@@ -14,8 +14,8 @@ const styleB = {
 class Picture extends Component {
   render() {
     return (
-      <div>
-        <div id="carouselExampleControls" className="carousel slide col" data-ride="carousel"style={styleB}>
+
+        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel"style={styleB}>
           <div className="carousel-inner">
             <div className="carousel-item active" >
               <img className="d-block w-100" src="/DOTA-TI-Vancouver-1-1068x560.jpg" alt="First slide"style={style.image}/>
@@ -36,7 +36,7 @@ class Picture extends Component {
             <span className="sr-only">Next</span>
           </a>
         </div>
-      </div>
+
       );
   }
 }

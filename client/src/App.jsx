@@ -17,7 +17,7 @@ class App extends Component {
     this.callTodaysMatches();
   }
 
-  callTodaysMatches() {
+  callTodaysMatches = () => {
     fetch('/api/getMatchesFromDb')
     .then(response => response.json())
     .then(json => {
@@ -26,6 +26,7 @@ class App extends Component {
     })
   }
 
+
   render() {
     if (this.state.games && this.state) {
 
@@ -33,7 +34,7 @@ class App extends Component {
       <div>
         <NavBar />
 
-        <MatchList todaysMatches={this.state.games} />
+        <MatchList callTodaysMatches={this.callTodaysMatches} todaysMatches={this.state.games} />
         <Picture/>
         <Footer />
       </div>

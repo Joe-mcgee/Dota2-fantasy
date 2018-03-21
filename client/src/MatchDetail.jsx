@@ -13,7 +13,8 @@ class MatchDetail extends Component {
     inputValue: [],
     poolArray: [],
     message: 'BID 0.02 ETH',
-    time: true
+    time: true,
+    score: []
     }
     var handleTimeExpiry = this.handleTimeExpiry.bind(this);
   }
@@ -38,12 +39,17 @@ class MatchDetail extends Component {
       const teamNumber = event.target.elements[0].value
       const accounts = await web3.eth.getAccounts();
       this.setState({ message: 'waiting on transaction success...'})
-      await betting.methods.enter(teamNumber).send({
+      const status = await betting.methods.enter(teamNumber).send({
         from: accounts[0],
         value: web3.utils.toWei('0.02', 'ether')
       });
+
       const poolArray = await betting.methods.getTotalAmountsBet().call()
-      this.setState({message: 'You have been entered!'});
+      if (status.status == '0x1') {
+        this.setState({message: 'You have been entered!'});
+      } else {
+        this.setState({message: 'No betting Twice!'})
+      }
       this.setState({poolArray})
 
     }
@@ -66,7 +72,11 @@ class MatchDetail extends Component {
   updateMatchInfo = async () => {
     let winner = null;
     const response = await fetch('api/updateScore')
-    console.log(this.props.teamOneScore, this.props.teamTwoScore)
+    const updatedMatch = await (await fetch('api/getMatchesFromDb')).json();
+    console.log(updatedMatch)
+
+
+
     if (this.props.teamOneScore > this.props.teamTwoScore) {
       winner = '0'
     }
@@ -74,7 +84,8 @@ class MatchDetail extends Component {
       winner = '1'
     }
     if (this.props.teamOneScore == this.props.teamTwoScore) {
-      winner = '2'
+      this.setState({message: 'error, no draws allowed'})
+      return
     }
 
     const accounts = await web3.eth.getAccounts()
@@ -104,8 +115,8 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">{this.props.teamOneScore}</h4>
-                                                <h4 className="text-center">{(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
+                                                <h4 className="text-center">Score: {this.props.teamOneScore}</h4>
+                                                <h4 className="text-center">Bets: {(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
                                             </div>
                                         </div>
                                         <div className="row"></div>
@@ -116,7 +127,7 @@ render() {
                         {isTime ? (
                         <form onSubmit={this.onSubmit}>
                           <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
-                            <button type='submit'>
+                            <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
                           </div>
@@ -141,8 +152,8 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">{this.props.teamTwoScore}</h4>
-                                                <h4 className="text-center">{(this.state.poolArray[1] / 1000000000000000000) / 0.02 } </h4>
+                                                <h4 className="text-center">Score: {this.props.teamTwoScore}</h4>
+                                                <h4 className="text-center">Bets: {(this.state.poolArray[1] / 1000000000000000000) / 0.02 } </h4>
                                             </div>
                                         </div>
                                         <div className="row"></div>
@@ -152,8 +163,8 @@ render() {
                         </div>
                         {isTime ? (
                         <form onSubmit={this.onSubmit}>
-                          <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
-                          <button type='submit'>
+                          <input className='Choice' name='choice2' type='hidden' defaultValue='1' />
+                          <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
                           <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
                             <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
                           </div>
