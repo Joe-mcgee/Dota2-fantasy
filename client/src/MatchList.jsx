@@ -53,7 +53,6 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
     return matchList
   }
 
-
   getMatchDetails() {
     console.log(this.props)
     console.log(this.state)
@@ -67,12 +66,11 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
           teamTwoLogo: game.teamTwoLogo,
           teamOneScore: game.teamOneScore,
           teamTwoScore: game.teamTwoScore,
-   }
-      if (this.state.show === game.apiMatchId) {
-      return (
-              <MatchDetail {...props} />
-      )
-    }
+      }
+
+      if (this.state.show === game.apiMatchId)
+        return (<MatchDetail {...props} />)
+
     })
     console.log(matchDetails)
     return matchDetails;
@@ -83,7 +81,7 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
             <Route exact path='/matches' component={App} />
             {this.getMatchDetails()}
             </Switch>
-      )
+    )
   }
 
   render() {
@@ -93,27 +91,9 @@ game.teamOneName} vs. {game.teamTwoName}</strong></a></li>
             <ul className="nav nav-tabs card-header-tabs">
                 {this.getMatchList()}
             </ul>
-        </div>
-
-        {this.getMatchDetails()}
-
-        </div>
-
-
-
+        </div>{this.getMatchDetails()}</div>
     );
-   }
+  }
 }
 
 export default MatchList;
-
-
-/*    componentDidMount() {
-    this.callTodaysMatches()
-    .then(res => {
-      console.log(res)
-      this.setState({games: res})
-    }).catch(err => console.log(err));
-
-  }
-*/
