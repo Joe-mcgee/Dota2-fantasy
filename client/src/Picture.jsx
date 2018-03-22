@@ -1,21 +1,10 @@
 import React, {Component} from 'react';
 
-const styleA = {
-  maxWidth:'100%',
-  maxHeight:'650px',
-  width:'100%',
-  height: '430px',
-}
-const styleB = {
-  width:'100%'
-}
-
-
 class Picture extends Component {
   render() {
     return (
 
-        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel"style={styleB}>
+        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel"style={style.carousel}>
           <div className="carousel-inner">
             <div className="carousel-item active" >
               <img className="d-block w-100" src="/DOTA-TI-Vancouver-1-1068x560.jpg" alt="First slide"style={style.image}/>
