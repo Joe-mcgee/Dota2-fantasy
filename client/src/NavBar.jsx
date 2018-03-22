@@ -21,11 +21,12 @@ class NavBar extends Component {
 
 const style = {
   fullNavBar : {
-    backgroundColor: 'rgb(14,14,14)'
+    backgroundColor: 'rgb(14,14,14)',
+    height: '6em'
   },
   logo : {
-    width: '203px',
-    margin: '-50px -50px -50px -30px'
+    width: '230px',
+    margin: '-40px -40px -40px -20px'
   },
   logout : {
     backgroundColor: '#fca311',

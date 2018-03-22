@@ -100,120 +100,162 @@ render() {
   const isTime = this.state.time;
     return (
 
-<div className="card-body">
-            <h4 className="text-center card-title" style={style.timer}><Timer handleTimeExpiry={this.handleTimeExpiry.bind(this)} {...this.props}/></h4>
-            <div style={style.updateButton}><button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button></div>
-            <div className="row">
-                <div className="col">
-                    <div className="card" style={style.leftCard}>
-                        <h4 className="text-center">{this.props.teamOneName}</h4>
-                        <div className="card-body">
-                            <div className="container">
-                                <div className="row">
-                                <div className="col"><img style={style.leftTeamLogo} src={this.props.teamOneLogo} /></div>
-                                    <div className="col-lg-4 offset-lg-0">
-                                        <div className="row"></div>
-                                        <div className="row">
-                                            <div className="col">
-                                                <h4 className="text-center">Score: {this.state.teamOneScore}</h4>
-                                                <h4 className="text-center">Bets: {(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
-                                            </div>
-                                        </div>
-                                        <div className="row"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {isTime ? (
-                        <form onSubmit={this.onSubmit}>
-                          <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
-                            <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
-                          <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
-                            <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
-                          </div>
-                           </button>
-                        </form>
-                      ): (
-                          <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
-                            <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
 
-                          </div>
-                      )}
-                    </div>
-                </div>
-                <div className="col">
-                    <div className="card" style={style.rightCard}>
-                        <h4 className="text-center">{this.props.teamTwoName}</h4>
-                        <div className="card-body">
-                            <div className="container">
-                                <div className="row">
-                                    <div className="col"><img style={style.teamLogo}src={this.props.teamTwoLogo}/></div>
-                                    <div className="col-lg-4">
-                                        <div className="row"></div>
-                                        <div className="row">
-                                            <div className="col">
-                                                <h4 className="text-center">Score: {this.state.teamTwoScore}</h4>
-                                                <h4 className="text-center">Bets: {(this.state.poolArray[1] / 1000000000000000000) / 0.02 } </h4>
-                                            </div>
-                                        </div>
-                                        <div className="row"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {isTime ? (
-                        <form onSubmit={this.onSubmit}>
-                          <input className='Choice' name='choice2' type='hidden' defaultValue='1' />
-                          <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
-                          <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
-                            <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
-                          </div>
-                           </button>
-                        </form>
-                          ):(
-                          <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
-                            <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
-                          </div>
-                          )}
-                    </div>
-                </div>
-            </div>
+      <div className="card-body">
+
+        {/* Timer element */}
+        <h4 className="text-center card-title" style={style.timer}>
+          <Timer handleTimeExpiry={this.handleTimeExpiry.bind(this)} {...this.props}/>
+        </h4>
+
+        {/* Update button */}
+        <div className="row text-center" style={style.updateButton}>
+          <button className="btn btn-warning"onClick={this.updateMatchInfo}>update</button>
         </div>
 
+        <div className="row">
+
+          {/* Left Team Card */}
+          <div className="col">
+            <div className="card" style={style.teamLiquidBackground}>
+
+              {/* Left Team Title */}
+              <h4 className="text-center">{this.props.teamOneName}</h4>
+              <div className="card-body">
+                <div className="container">
+
+                  {/* Left Team Logo */}
+                  <div className="row">
+                    <div className="col text-center">
+                      <img src={this.props.teamOneLogo} />
+                    </div>
+                  </div>
+
+                  {/* Left Team Sores and Bets */}
+                  <div className="row">
+                    <div className="col">
+                      <h4 className="text-center">Score: {this.state.teamOneScore}</h4>
+                      <h4 className="text-center">Bets: {(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
+
+                    </div>
+                  </div>
+
+                </div>
+
+              </div>
+
+              {isTime ? (
+
+              /* Left Team Button When Bids Are Open */
+              <form onSubmit={this.onSubmit}>
+                <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
+                <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
+                  <div className="card-footer" data-bs-hover-animate="flash" style={style.teamLiquidFooter}>
+                  <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
+                  </div>
+                </button>
+              </form>
+
+              ): (
+              /* Left Team Button When Bids Are Closed */
+              <div className="card-footer" data-bs-hover-animate="flash" style={style.teamLiquidFooter}>
+                <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
+              </div>
+              )}
+
+            </div>
+          </div>
+
+
+          {/* Right Team Card */}
+          <div className="col">
+            <div className="card" style={style.otherTeamBackground}>
+
+              {/* Right Team Title */}
+              <h4 className="text-center">{this.props.teamTwoName}</h4>
+              <div className="card-body">
+                <div className="container">
+
+                  {/* Right Team Logo */}
+                  <div className="row">
+                    <div className="col text-center">
+                      <img src={this.props.teamTwoLogo} />
+                    </div>
+                  </div>
+
+                  {/* Right Team Sores and Bets */}
+                  <div className="row">
+                    <div className="col">
+                      <h4 className="text-center">Score: {this.state.teamTwoScore}</h4>
+                      <h4 className="text-center">Bets: {(this.state.poolArray[1] / 1000000000000000000) / 0.02 }</h4>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              {isTime ? (
+
+              /* Right Team Button When Bids Are Open */
+              <form onSubmit={this.onSubmit}>
+                <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
+                <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
+                  <div className="card-footer" data-bs-hover-animate="flash" style={style.otherTeamFooter}>
+                  <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
+                  </div>
+                </button>
+              </form>
+
+              ): (
+              /* Right Team Button When Bids Are Closed */
+              <div className="card-footer" data-bs-hover-animate="flash" style={style.otherTeamFooter}>
+                <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
+              </div>
+              )}
+
+            </div>
+          </div>
+        </div>
+      </div>
     );
    }
 }
 
 const style = {
-
   timer: {
-    bontSize:'86px',
+    fontSize:'2em',
   },
 
-  leftCard: {
-    backgroundColor: 'rgb(245,245,245)'
+  teamLiquidBackground: {
+    float: 'right',
+    width: '22em',
+    backgroundColor: 'rgb(221, 234, 255)'
   },
 
-  cardFooter: {
+  otherTeamBackground: {
+    float: 'left',
+    width: '22em',
+    backgroundColor: 'rgb(255, 234, 234)'
+  },
+
+  teamLiquidFooter: {
     height:'60px',
-    backgroundColor:'#fca311'
+    backgroundColor:'rgb(40, 104, 255)'
+  },
+
+  otherTeamFooter: {
+    height:'60px',
+    backgroundColor:'rgb(255, 40, 40)'
   },
 
   footerText: {
     color:'rgb(255,255,255)'
   },
 
-  rightCard: {
-    backgroundColor:'rgb(245,245,245)'
-  },
-
   updateButton: {
     textAlign:'center',
-    margin: 'auto'
-  },
-
-  teamLogo: {
-    float: 'right'
+    justifyContent: 'center',
+    margin: '0em 0em 1em 0em'
   },
 };
 
