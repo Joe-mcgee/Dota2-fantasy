@@ -239,12 +239,12 @@ const style = {
   },
 
   teamLiquidFooter: {
-    height:'60px',
+    height:'70px',
     backgroundColor:'rgb(40, 104, 255)'
   },
 
   otherTeamFooter: {
-    height:'60px',
+    height:'70px',
     backgroundColor:'rgb(255, 40, 40)'
   },
 
