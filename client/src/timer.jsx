@@ -30,10 +30,10 @@ class Timer extends React.Component {
   startTimer(handleTimeExpiry) {
     if (this.timer === 0) {
       var endTime = this.state.endTime;
-      console.log(endTime)
       var secondsToTime = this.secondsToTime;
       this.timer = setInterval(function(){
         var seconds = endTime - Date.parse(new Date());
+        console.log(seconds)
           if (seconds <= 0) {
             // var timeObj = secondsToTime(seconds);
             var clock = document.getElementById('clock');

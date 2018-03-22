@@ -14,7 +14,8 @@ class MatchDetail extends Component {
     poolArray: [],
     message: 'BID 0.02 ETH',
     time: true,
-    score: []
+    teamOneScore: 0,
+    teamTwoScore: 0
     }
     var handleTimeExpiry = this.handleTimeExpiry.bind(this);
   }
@@ -55,7 +56,7 @@ class MatchDetail extends Component {
     }
 
     //for determining winner
-    onClick = async () => {
+/*    onClick = async () => {
       const winner = 0
       const accounts = await web3.eth.getAccounts();
 
@@ -66,24 +67,23 @@ class MatchDetail extends Component {
       });
 
       this.setState({message: 'A winner has been picked!'});
-    }
+    }*/
 
 
   updateMatchInfo = async () => {
     let winner = null;
     const response = await fetch('api/updateScore')
     const updatedMatch = await (await fetch('api/getMatchesFromDb')).json();
-    console.log(updatedMatch)
+    this.setState({teamOneScore: updatedMatch[0].teamOneScore})
+    this.setState({teamTwoScore: updatedMatch[0].teamTwoScore})
 
-
-
-    if (this.props.teamOneScore > this.props.teamTwoScore) {
+    if (this.state.teamOneScore > this.state.teamTwoScore) {
       winner = '0'
     }
-    if (this.props.teamOneScore < this.props.teamTwoScore) {
+    if (this.state.teamOneScore < this.state.teamTwoScore) {
       winner = '1'
     }
-    if (this.props.teamOneScore == this.props.teamTwoScore) {
+    if (this.state.teamOneScore == this.state.teamTwoScore) {
       this.setState({message: 'error, no draws allowed'})
       return
     }
@@ -115,7 +115,7 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">Score: {this.props.teamOneScore}</h4>
+                                                <h4 className="text-center">Score: {this.state.teamOneScore}</h4>
                                                 <h4 className="text-center">Bets: {(this.state.poolArray[0] / 1000000000000000000) / 0.02 }</h4>
                                             </div>
                                         </div>
@@ -152,7 +152,7 @@ render() {
                                         <div className="row"></div>
                                         <div className="row">
                                             <div className="col">
-                                                <h4 className="text-center">Score: {this.props.teamTwoScore}</h4>
+                                                <h4 className="text-center">Score: {this.state.teamTwoScore}</h4>
                                                 <h4 className="text-center">Bets: {(this.state.poolArray[1] / 1000000000000000000) / 0.02 } </h4>
                                             </div>
                                         </div>

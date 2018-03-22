@@ -13,11 +13,11 @@ module.exports = (knex) => {
         teamTwoScore: 0
       })
       .then((count) => {
-         res.redirect('http://localhost:3000')
+        res.redirect('http://localhost:3000');
         // res.success();
-        return
+        return;
       });
 
   });
   return router;
-}
+};
