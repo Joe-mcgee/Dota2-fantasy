@@ -117,7 +117,7 @@ render() {
 
           {/* Left Team Card */},
           <div className="col">
-            <div className="card" style={style.cardBackgroundColor}>
+            <div className="card" style={style.teamLiquidBackground}>
 
               {/* Left Team Title */},
               <h4 className="text-center">{this.props.teamOneName}</h4>
@@ -148,7 +148,7 @@ render() {
               <form onSubmit={this.onSubmit}>
                 <input className='Choice' name='choice2' type='hidden' defaultValue='0'/>
                 <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
-                  <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
+                  <div className="card-footer" data-bs-hover-animate="flash" style={style.teamLiquidFooter}>
                   <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
                   </div>
                 </button>
@@ -156,7 +156,7 @@ render() {
 
               ): (
               /* Left Team Button When Bids Are Closed */
-              <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
+              <div className="card-footer" data-bs-hover-animate="flash" style={style.teamLiquidFooter}>
                 <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
               </div>              
               )}
@@ -167,7 +167,7 @@ render() {
 
           {/* Right Team Card */},
           <div className="col">
-            <div className="card" style={style.cardBackgroundColor}>
+            <div className="card" style={style.otherTeamBackground}>
 
               {/* Right Team Title */},
               <h4 className="text-center">{this.props.teamTwoName}</h4>
@@ -198,7 +198,7 @@ render() {
               <form onSubmit={this.onSubmit}>
                 <input className='Choice' name='choice2' type='hidden' defaultValue='1'/>
                 <button type='submit' style={{width: '100%', padding: '0', border: '0'}}>
-                  <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
+                  <div className="card-footer" data-bs-hover-animate="flash" style={style.otherTeamFooter}>
                   <h4 className="text-center" style={style.footerText}><strong>{this.state.message}</strong></h4>
                   </div>
                 </button>
@@ -206,7 +206,7 @@ render() {
 
               ): (
               /* Right Team Button When Bids Are Closed */
-              <div className="card-footer" data-bs-hover-animate="flash" style={style.cardFooter}>
+              <div className="card-footer" data-bs-hover-animate="flash" style={style.otherTeamFooter}>
                 <h4 className="text-center" style={style.footerText}><strong>Betting Expired</strong></h4>
               </div>              
               )}
@@ -224,13 +224,26 @@ const style = {
     fontSize:'2em',
   },
 
-  cardBackgroundColor: {
-    backgroundColor: 'rgb(245,245,245)'
+  teamLiquidBackground: {
+    float: 'right',
+    width: '22em',
+    backgroundColor: 'rgb(221, 234, 255)'
   },
 
-  cardFooter: {
+  otherTeamBackground: {
+    float: 'left',
+    width: '22em',
+    backgroundColor: 'rgb(255, 234, 234)'
+  },
+
+  teamLiquidFooter: {
     height:'60px',
-    backgroundColor:'#fca311'
+    backgroundColor:'rgb(40, 104, 255)'
+  },
+
+  otherTeamFooter: {
+    height:'60px',
+    backgroundColor:'rgb(255, 40, 40)'
   },
 
   footerText: {
